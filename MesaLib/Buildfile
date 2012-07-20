@@ -4,13 +4,15 @@
 name=MesaLib
 version=8.0.4
 release=1
-source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2)
+source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2
+        0001-Don-t-cross-compile-src-glsl-builtin_compiler.patch)
 depends=(libX11 xextproto libXext)
-#depends=(glproto xextproto dri2proto libX11 xf86vidmodeproto libXext  libXxf86vm libXt libXdamage libpciaccess expat talloc libxml2-python)
-#depends=(libdrm makedepend glproto xextproto dri2proto libX11 xf86vidmodeproto xorg-libXext  libXxf86vm libXt libXdamage libpciaccess expat talloc libxml2-python)
 
 build() {
    cd Mesa-$version
+
+   patch -p1 < $SRC/0001-Don-t-cross-compile-src-glsl-builtin_compiler.patch
+   NOCONFIGURE=1 ./autogen.sh
 
    ./configure --build=$BUILD \
                --host=$HOST \
@@ -28,4 +30,7 @@ build() {
 check() {
    check_tool makedepend
    check_tool python2
+   check_tool autoreconf
+   check_tool automake
+   check_tool aclocal
 }
