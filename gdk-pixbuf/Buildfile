@@ -1,0 +1,31 @@
+# Description: An image loading library for GTK+
+# URL: http://www.gtk.org/
+
+name=gdk-pixbuf
+version=2.26.1
+release=1
+source=(http://download.gnome.org/sources/$name/2.26/$name-$version.tar.xz)
+depends=(glib libX11 libpng libtiff libjpeg)
+
+build () {
+   cd $name-$version
+
+   echo "gio_can_sniff=no" > config.cache
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --disable-nls \
+               --without-libjasper \
+               --with-x11 \
+               --cache-file=config.cache
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/gtk-doc
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

@@ -1,0 +1,30 @@
+# Description: A 2D graphics library with support for multiple output devices
+# URL: http://www.cairographics.org/
+
+name=cairo
+version=1.12.2
+release=1
+source=(http://cairographics.org/releases/$name-$version.tar.xz)
+depends=(fontconfig libpng libXrender pixman)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-xlib=yes \
+               --enable-xlib-xrender=yes \
+               --enable-png=yes \
+               --enable-ft=yes \
+               --enable-tee=yes
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -rf $PKG/usr/share
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

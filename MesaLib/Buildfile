@@ -1,0 +1,31 @@
+# Description: The Mesa 3D Graphics Library
+# URL: http://www.mesa3d.org
+
+name=MesaLib
+version=8.0.4
+release=1
+source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2)
+depends=(libX11 xextproto libXext)
+#depends=(glproto xextproto dri2proto libX11 xf86vidmodeproto libXext  libXxf86vm libXt libXdamage libpciaccess expat talloc libxml2-python)
+#depends=(libdrm makedepend glproto xextproto dri2proto libX11 xf86vidmodeproto xorg-libXext  libXxf86vm libXt libXdamage libpciaccess expat talloc libxml2-python)
+
+build() {
+   cd Mesa-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --with-dri-drivers=swrast
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}
+
+check() {
+   check_tool makedepend
+   check_tool python2
+}

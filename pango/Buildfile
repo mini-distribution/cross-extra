@@ -1,0 +1,25 @@
+# Description: A library for layout and rendering of text
+# URL: http://www.gtk.org/
+
+name=pango
+version=1.30.1
+release=1
+source=(http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz)
+depends=(cairo glib libSM libXext libXft libpng)
+
+build () {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/gtk-doc
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

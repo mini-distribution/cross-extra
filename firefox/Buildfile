@@ -1,0 +1,26 @@
+# Description: The Mozilla Firefox browser
+# URL: http://www.mozilla.org
+
+name=firefox
+version=14.0.1
+release=1
+source=(http://releases.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
+        .mozconfig system_cairo.patch)
+depends=(gtk2 cairo dbus dbus-glib libpng libjpeg libffi zlib libX11 libXt MesaLib)
+
+build () {
+   cd mozilla-release
+
+   patch -p1 < $SRC/system_cairo.patch
+
+   cp $SRC/.mozconfig .
+
+   echo "ac_add_options --prefix=/usr" >> .mozconfig
+   echo "ac_add_options --host=$BUILD" >> .mozconfig
+   echo "ac_add_options --target=$HOST" >> .mozconfig
+   echo "mk_add_options MOZ_MAKE_FLAGS=-j$JOBS" >> .mozconfig
+
+   make -f client.mk build
+
+#   rm -r $PKG/usr/share/gtk-doc
+}
