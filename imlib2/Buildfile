@@ -1,0 +1,32 @@
+# Description: A fast image manipulation library
+# URL: http://freshmeat.net/projects/imlib2/
+
+name=imlib2
+version=1.4.5
+release=1
+source=(http://heanet.dl.sourceforge.net/project/enlightenment/imlib2-src/$version/$name-$version.tar.bz2)
+depends=(freetype libpng libtiff libSM libXext)
+
+build() {
+   cd $name-$version
+
+   export CPPFLAGS="-I$SYSROOT/usr/include/freetype2"
+   export LDFLAGS="-lfreetype"
+  
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --with-png \
+               --with-tiff \
+               --with-jpeg \
+               --with-zlib \
+               --with-x \
+               --without-id3 \
+               --without-freetype-config
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}

@@ -1,0 +1,27 @@
+# Description: Fast, lightweight, standards-compliant window manager
+# URL: http://openbox.org
+
+name=openbox
+version=3.5.0
+release=1
+source=(http://openbox.org/dist/openbox/openbox-$version.tar.gz)
+depends=(libXrandr libSM glib libxml2 pango)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --disable-nls \
+               --libexecdir=/usr/lib/openbox
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   mv $PKG/usr/share/doc/$name/*.xsd $PKG/usr/etc/xdg/$name
+   rm -rf $PKG/usr/share/doc
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
