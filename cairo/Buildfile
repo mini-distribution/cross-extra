@@ -5,7 +5,7 @@ name=cairo
 version=1.12.2
 release=1
 source=(http://cairographics.org/releases/$name-$version.tar.xz)
-depends=(fontconfig libpng libXrender pixman)
+depends=(fontconfig libpng libXrender pixman glib)
 
 build() {
    cd $name-$version
