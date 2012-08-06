@@ -240,7 +240,6 @@ drwxr-xr-x	root/root	usr/share/icu/4.8.1.1/
 drwxr-xr-x	root/root	usr/share/icu/4.8.1.1/config/
 -rw-r--r--	root/root	usr/share/icu/4.8.1.1/config/mh-linux
 -rwxr-xr-x	root/root	usr/share/icu/4.8.1.1/install-sh
--rw-r--r--	root/root	usr/share/icu/4.8.1.1/license.html
 -rwxr-xr-x	root/root	usr/share/icu/4.8.1.1/mkinstalldirs
 drwxr-xr-x	root/root	usr/share/man/
 drwxr-xr-x	root/root	usr/share/man/man1/
