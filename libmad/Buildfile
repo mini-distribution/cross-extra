@@ -1,0 +1,25 @@
+# Description: High-quality MPEG Audio Decoder library.
+# URL: http://www.underbit.com/products/mad/
+
+name=libmad
+version=0.15.1b
+release=4
+source=(http://downloads.sourceforge.net/project/mad/$name/$version/$name-$version.tar.gz
+	mad.pc)
+
+build() {
+  install -d $PKG/usr/lib/pkgconfig
+  sed -e "s/#version#/$version/" mad.pc > $PKG/usr/lib/pkgconfig/mad.pc
+
+  cd $name-$version
+
+  # remove -fforce-mem
+  sed -i -e '19102d' configure
+
+  ./configure --build=$BUILD \
+              --host=$HOST \
+              --prefix=/usr \
+              --disable-debugging
+  make -j $JOBS
+  make DESTDIR=$PKG install
+}
