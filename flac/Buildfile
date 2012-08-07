@@ -16,7 +16,8 @@ build() {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --with-ogg=$SYSROOT/usr/lib
+               --with-ogg=$SYSROOT/usr/lib \
+               --disable-xmms-plugin
 
    make -j $JOBS
    make DESTDIR=$PKG install
