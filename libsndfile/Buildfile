@@ -19,7 +19,7 @@ build() {
         --mandir=/usr/man \
         --disable-static
 
-   make
+   make -j $JOBS
    make DESTDIR=$PKG install
 
    rm -r $PKG/usr/share/doc
