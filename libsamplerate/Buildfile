@@ -1,0 +1,28 @@
+# Description: Sound sample rate conversion library.
+# URL: http://www.mega-nerd.com/SRC/
+
+name=libsamplerate
+version=0.1.8
+release=1
+source=(http://www.mega-nerd.com/SRC/$name-$version.tar.gz)
+depends=(libsndfile)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --mandir=/usr/man \
+               --disable-gcc-pipe \
+               --disable-dependency-tracking
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/doc
+   rmdir $PKG/usr/share
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
