@@ -7,7 +7,7 @@ version=2.7.2
 release=1
 source=(http://www.python.org/ftp/$name/$version/Python-$version.tar.bz2 \
         $name-$version-xcompile.patch)
-depends=(openssl readline bzip2 zlib libffi)
+depends=(db gdbm openssl readline bzip2 zlib)
 
 build () {
   cd Python-$version
