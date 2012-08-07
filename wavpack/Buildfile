@@ -1,0 +1,21 @@
+# Description: Lossless audio compression software.
+# URL: http://www.wavpack.com/
+
+name=wavpack
+version=4.60.1
+release=1
+source=(http://www.wavpack.com/wavpack-$version.tar.bz2)
+
+build() {
+   cd wavpack-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
