@@ -1,0 +1,28 @@
+# Description: Free Lossless Audio Codec.
+# URL: http://flac.sourceforge.net/
+
+name=flac
+version=1.2.1
+release=1
+source=(http://downloads.sourceforge.net/project/$name/flac-src/$name-$version-src/$name-$version.tar.gz
+	flac-gcc-fix.patch)
+depends=(libogg)
+
+build() {
+   cd $name-$version
+
+   patch -p0 < $SRC/flac-gcc-fix.patch
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --with-ogg=$SYSROOT/usr/lib
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -rf $PKG/usr/share/doc
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
