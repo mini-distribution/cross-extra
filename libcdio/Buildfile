@@ -15,7 +15,7 @@ build() {
                --prefix=/usr \
                --disable-static
 
-   make
+   make -j $JOBS
    make DESTDIR=$PKG install
 
    rm -r $PKG/usr/share
