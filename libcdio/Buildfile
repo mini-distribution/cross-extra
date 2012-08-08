@@ -1,0 +1,25 @@
+# Description: A library for CD-ROM and CD image access.
+# URL: http://www.gnu.org/software/libcdio/
+
+name=libcdio
+version=0.83
+release=1
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+depends=(cdparanoia)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --disable-static
+
+   make
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
