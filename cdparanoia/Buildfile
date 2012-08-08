@@ -1,0 +1,21 @@
+# Description: CDDA extraction tool with jitter correction
+# URL:         http://xiph.org/paranoia/
+
+name=cdparanoia
+version=10.2
+release=1
+source=(http://downloads.xiph.org/releases/$name/$name-III-$version.src.tgz
+        $name-$version-gcc43.patch)
+
+build () {
+   cd $name-III-$version
+   patch -p0 -i $SRC/$name-$version-gcc43.patch
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+   
+   # Does not support parallel building environment
+   make -j 1
+   make prefix=$PKG/usr MANDIR=$PKG/usr/share install
+}
