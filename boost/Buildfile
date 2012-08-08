@@ -1,0 +1,40 @@
+# Description: Free peer-reviewed portable C++ source libraries.
+# URL: http://www.boost.org/
+
+name=boost
+version=1.50.0
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.tar.bz2)
+depends=(expat icu python zlib)
+
+build() {
+  cd ${name}_${version//./_}
+
+  echo "using gcc : arm : $HOST-g++ ;" >> tools/build/v2/user-config.jam
+  echo "using python : 2.7 : $SYSROOT/usr/bin/python2.7 : $SYSROOT/usr/include/python2.7 : $SYSROOT/usr/lib ;" >> tools/build/v2/user-config.jam
+
+  ./bootstrap.sh --prefix=/usr \
+                 --with-python=$SYSROOT/usr/bin/python \
+                 --with-python-root=$SYSROOT/usr \
+                 --with-python-version=2.7 \
+                 --with-icu=$SYSROOT/usr
+
+  ./b2 -j $JOBS \
+         -q -d+2 \
+         install \
+         release \
+         threading=single,multi \
+         runtime-link=shared \
+         link=shared,static \
+         debug-symbols=off \
+         --toolset=gcc \
+         --layout=tagged \
+         --prefix=$PKG/usr \
+         --without-mpi
+
+	cd libs/python/pyste/install
+	python setup.py install --root=$PKG --prefix=/usr
+
+	mv $PKG/usr/bin/pyste.py $PKG/usr/bin/pyste
+	find $PKG -name '*.egg-info' | xargs rm
+}
