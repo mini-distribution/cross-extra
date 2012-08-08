@@ -1,0 +1,19 @@
+# Description: Native asynchronous I/O (AIO) support library
+# URL:         http://lse.sourceforge.net/io/aio.html
+
+name=libaio
+version=0.3.109
+release=1
+source=(http://crux.s3.amazonaws.com/dist/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   sed -i '15,18s/^/#/' Makefile
+
+   make -j $JOBS CC=$HOST-gcc
+   make prefix=$PKG/usr install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
