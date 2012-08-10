@@ -32,4 +32,5 @@ check() {
    check_tool autoreconf
    check_tool automake
    check_tool aclocal
+   check_lib /usr/share/pyshared/libxml2.py
 }
