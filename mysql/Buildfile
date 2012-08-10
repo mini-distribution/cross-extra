@@ -7,7 +7,7 @@ version=5.5.27
 release=1
 source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/$name-$version.tar.gz \
         my.cnf mysql_va_list.patch)
-depends=(openssl zlib libaio ncurses)
+depends=(openssl zlib libaio ncurses tcp_wrappers)
 
 build () {
    cd $name-$version
@@ -39,8 +39,8 @@ build () {
          -DINSTALL_LIBDIR=lib \
          -DINSTALL_PLUGINDIR=lib/mysql/plugin \
          -DWITH_EMBEDDED_SERVER=TRUE \
-         -DWITH_LIBWRAP=0 \
-         -DWITH_SSL=bundled \
+         -DWITH_LIBWRAP=1 \
+         -DWITH_SSL=system \
          -DCURSES_LIBRARY=$SYSROOT/usr/lib/libncurses.a \
          -DCURSES_INCLUDE_PATH=$SYSROOT/usr/include \
          -DWITH_ZLIB=system \
@@ -65,7 +65,7 @@ build () {
 
    rm -r $PKG/usr/share/{mysql-test,info}
    rm $PKG/usr/share/mysql/charsets/README
-   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
+#   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
 
 #   install -d  $PKG/var/{lib,log}
 #   touch mysqld.log
