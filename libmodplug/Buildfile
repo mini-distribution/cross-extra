@@ -1,0 +1,21 @@
+# Description: Library for playing module music.
+# URL: http://modplug-xmms.sourceforge.net/
+
+name=libmodplug
+version=0.8.8.4
+release=1
+source=(http://downloads.sourceforge.net/project/modplug-xmms/$name/$version/$name-$version.tar.gz)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
