@@ -1,0 +1,64 @@
+# Description: SMB server and client for unix
+# URL:         http://www.samba.org
+
+name=samba
+version=3.6.7
+release=1
+source=(http://www.samba.org/samba/ftp/stable/$name-$version.tar.gz
+        samba-config.patch)
+depends=(ncurses openssl readline zlib tdb talloc libcap acl)
+
+build () {
+   cd $name-$version/source3
+
+   patch -d .. -p1 -i $SRC/samba-config.patch
+
+   export samba_cv_HAVE_GETTIMEOFDAY_TZ=yes
+   export samba_cv_USE_SETEUID=yes
+   export samba_cv_HAVE_IFACE_IFCONF=yes
+   export SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=no
+   export samba_cv_CC_NEGATIVE_ENUM_VALUES=yes
+   export samba_cv_have_longlong=yes
+   export libreplace_cv_HAVE_GETADDRINFO=no
+   export ac_cv_file__proc_sys_kernel_core_pattern=yes
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --localstatedir=/var \
+               --with-fhs \
+               --with-configdir=/etc/samba \
+               --with-modulesdir=/usr/lib/samba \
+               --with-lockdir=/var/run/samba \
+               --with-piddir=/var/run/samba \
+               --with-nmbdsocketdir=/var/run/samba \
+               --with-logfilebase=/var/log/samba \
+               --disable-swat \
+               --with-included-popt \
+               --enable-external-{libtdb,libtalloc}
+
+    make -j $JOBS
+    make DESTDIR=$PKG install
+
+    # pkg-config files
+    install -d $PKG/usr/lib/pkgconfig
+    install pkgconfig/*.pc $PKG/usr/lib/pkgconfig
+
+    # nsswitch extensions
+    install -d $PKG/lib
+    install ../nsswitch/libnss_win{s,bind}.so $PKG/lib
+    ln -s libnss_wins.so $PKG/lib/libnss_wins.so.2
+    ln -s libnss_winbind.so $PKG/lib/libnss_winbind.so.2
+
+    # spool/log/lib directory
+    install -d $PKG/var/{lib,log}/samba
+    install -d -m 1777 $PKG/var/spool/samba
+
+    # config-file and init script
+    install -m 600 ../examples/smb.conf.default $PKG/etc/samba
+#    install -D -m 755  $SRC/samba $PKG/etc/rc.d/samba
+
+    # cleanup
+    rm $PKG/usr/share/man/man8/{swat.8,tdb*.8}
+    rm -r $PKG/usr/share/locale
+}

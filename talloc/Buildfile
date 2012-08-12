@@ -1,0 +1,30 @@
+# Description: Hierarchical, reference counted memory pool system with destructors
+# URL: http://talloc.samba.org/
+
+name=talloc
+version=2.0.7
+release=1
+source=(ftp://ftp.samba.org/pub/$name/$name-$version.tar.gz
+        talloc.3 cross-32bit.answers)
+
+build() {
+   cd $name-$version
+
+   CC=$HOST-gcc \
+   ./configure --cross-compile \
+               --prefix=/usr \
+               --enable-talloc-compat1 \
+               --hostcc=$HOST-gcc \
+               --disable-python \
+               --cross-answers=$SRC/cross-32bit.answers
+
+   # Don't depend on xsltproc or docbook.sourceforge.net being available
+   cp $SRC/talloc.3 .
+   touch talloc.3 talloc.3.html
+
+   make -j $JOBS
+   make install DESTDIR=$PKG
+
+   install -d $PKG/usr/share/man/man3
+   install -m 644 talloc.3 $PKG/usr/share/man/man3
+}

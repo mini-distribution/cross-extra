@@ -1,0 +1,26 @@
+# Description: Trivial DataBase similar gdbm
+# URL: http://tdb.samba.org
+
+name=tdb
+version=1.2.10
+release=1
+source=(http://www.samba.org/ftp/$name/$name-$version.tar.gz
+       {tdbbackup,tdbdump,tdbrestore,tdbtool}.8
+       cross-32bit.answers)
+
+build () {
+   cd $name-$version
+
+   CC=$HOST-gcc \
+   ./configure --prefix=/usr \
+               --cross-compile \
+               --hostcc=$HOST-gcc \
+               --disable-python \
+               --cross-answers=$SRC/cross-32bit.answers
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   install -d $PKG/usr/share/man/man8
+   install -m 0644 $SRC/*.8 $PKG/usr/share/man/man8
+}
