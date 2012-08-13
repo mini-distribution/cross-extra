@@ -1,0 +1,34 @@
+# Description: A library which supports many formats, including: mod, s3m, it, and xm.
+# URL: http://mikmod.shlomifish.org/
+
+name=libmikmod
+version=3.2.0
+release=1
+source=(http://mikmod.shlomifish.org/files/$name-$version.tar.gz)
+depends=(alsa-lib)
+
+build(){
+   cd $name-$version
+
+   sed -i docs/Makefile.in \
+        -e 's|^INFO_DEPS = .*|INFO_DEPS =|g'
+	
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-alsa \
+               --mandir=/usr/share \
+               --disable-static \
+               --disable-esd \
+               --disable-oss \
+               --disable-dependency-tracking
+
+   make
+   make DESTDIR=$PKG install
+
+   chmod a+x $PKG/usr/lib/*.la
+#   rm -r $PKG/usr/info
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
