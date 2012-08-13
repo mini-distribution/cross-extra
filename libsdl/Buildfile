@@ -14,7 +14,7 @@ build () {
                --host=$HOST \
                --prefix=/usr \
                 --enable-alsa \
-                --mandir=/usr/man
+                --mandir=/usr/share/man
 
    make -j $JOBS
    make DESTDIR=$PKG install
