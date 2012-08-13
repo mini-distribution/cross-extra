@@ -18,7 +18,6 @@ build(){
                --prefix=/usr \
                --enable-alsa \
                --mandir=/usr/share \
-               --disable-static \
                --disable-esd \
                --disable-oss \
                --disable-dependency-tracking
