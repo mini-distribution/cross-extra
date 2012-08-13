@@ -1,0 +1,21 @@
+# Description: Codec JPEG-2000 Part-1 standard.
+# URL: http://www.ece.uvic.ca/~frodo/jasper/
+
+name=jasper
+version=1.900.1
+release=1
+source=(http://www.ece.uvic.ca/~frodo/jasper/software/$name-$version.zip)
+depends=(freeglut libjpeg)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --mandir=/usr/share \
+               --enable-shared
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}
