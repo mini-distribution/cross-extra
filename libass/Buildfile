@@ -1,0 +1,22 @@
+# Description: A portable subtitle renderer for the ASS/SSA (Advanced Substation Alpha/Substation Alpha) subtitle format
+# URL: http://code.google.com/p/libass/
+
+name=libass
+version=0.10.0
+release=1
+source=(http://libass.googlecode.com/files/$name-$version.tar.xz)
+depends=(fribidi enca freetype fontconfig)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
