@@ -1,0 +1,24 @@
+# Description: A library for creating an embedded HTTP server
+# URL: http://www.gnu.org/software/libmicrohttpd/
+
+name=libmicrohttpd
+version=0.9.21
+release=1
+source=(http://ftp.club.cc.cmu.edu/pub/gnu/$name/$name-$version.tar.gz)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/info
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
+
