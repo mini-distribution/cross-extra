@@ -1,0 +1,38 @@
+# Description: Detects character set and encoding of text files and can convert them to other encodings
+# URL: http://cihar.com/software/enca/
+
+name=enca
+version=1.13
+release=1
+source=(http://dl.cihar.com/$name/$name-$version.tar.bz2
+        enca-1.13-crosscompile.patch)
+
+build() {
+   cd $name-$version
+
+   patch -p1 < $SRC/enca-1.13-crosscompile.patch
+
+   ac_cv_file__dev_random=yes \
+   ac_cv_file__dev_urandom=no \
+   ac_cv_file__dev_srandom=no \
+   ac_cv_file__dev_arandom=no \
+   ./autogen.sh --build=$BUILD \
+                --host=$HOST \
+                --prefix=/usr \
+                --libexecdir=/usr/lib \
+                --disable-external \
+                --without-librecode \
+                --disable-rpath \
+                --with-gnu-ld
+
+   # Build make_hash native tool first
+   make -j $JOBS -C tools CC="gcc"
+   
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/gtk-doc
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
