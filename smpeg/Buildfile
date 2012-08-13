@@ -1,0 +1,29 @@
+# Description: SMPEG command line MPEG audio/video player
+# URL: http://icculus.org/smpeg/
+
+name=smpeg
+version=0.4.5r396
+release=1
+source=(http://buildgear.org/mirror/$name-$version.tar.xz)
+depends=(libsdl libX11)
+
+build () {
+   cd $name-$version
+
+   ./autogen.sh
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --disable-opengl-player \
+               --disable-gtk-player \
+               --disable-sdltest \
+               --with-sdl-prefix=$SYSROOT/usr \
+               --with-x
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
