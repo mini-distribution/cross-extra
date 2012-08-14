@@ -1,0 +1,16 @@
+# Description: A OpenGL Extension Wrangler Library for developers to initialize extensions and write portable applications.
+# URL: http://glew.sourceforge.net/
+
+name=glew
+version=1.9.0
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tgz)
+depends=(MesaLib libXi libXmu)
+
+build() {
+    cd $name-$version
+
+    make CC="$HOST-gcc" LD="$HOST-gcc" STRIP="$HOST-strip"
+
+    make LIBDIR="$PKG/usr/lib" GLEW_DEST=$PKG/usr install
+}
