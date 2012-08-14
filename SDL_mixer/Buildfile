@@ -1,0 +1,40 @@
+# Description: A sample multi-channel audio mixer library.
+# URL: http://www.libsdl.org/projects/SDL_mixer/
+
+name=SDL_mixer
+version=1.2.12
+release=1
+source=(http://www.libsdl.org/projects/SDL_mixer/release/$name-$version.tar.gz)
+depends=(libvorbis smpeg libmikmod flac)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-music-cmd \
+               --enable-music-wave \
+               --disable-music-libmikmod \
+               --disable-music-mod \
+               --disable-music-midi \
+               --disable-music-timidity-midi \
+               --enable-music-native-midi \
+               --enable-music-native-midi-gpl \
+               --enable-music-ogg \
+               --disable-music-ogg-shared \
+               --disable-music-mp3 \
+               --disable-smpegtest \
+               --enable-music-mp3-shared \
+               --with-smpeg-prefix=$SYSROOT
+
+   make -j $JOBS CFLAGS="-I$SYSROOT/usr/include/smpeg"
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
+
+check() {
+   check_tool autoconf
+}

@@ -1,0 +1,35 @@
+# Description: SDL_image is an image file loading library.
+# URL: http://www.libsdl.org/projects/SDL_image
+
+name=SDL_image
+version=1.2.12
+release=1
+source=(http://www.libsdl.org/projects/SDL_image/release/$name-$version.tar.gz)
+depends=(libtiff libpng libsdl)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-bmp \
+               --enable-gif \
+               --enable-jpg \
+               --disable-lbm \
+               --enable-pcx \
+               --enable-png \
+               --enable-pnm \
+               --enable-tga \
+               --enable-tif \
+               --enable-xcf \
+               --enable-xpm \
+               --disable-xv \
+               --disable-webp
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
