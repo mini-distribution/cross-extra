@@ -20,6 +20,10 @@ build() {
               --host=$HOST \
               --prefix=/usr \
               --disable-debugging
+
   make -j $JOBS
   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
 }
