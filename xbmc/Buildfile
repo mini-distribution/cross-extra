@@ -4,21 +4,62 @@
 name=xbmc
 version=11.0
 release=1
-source=(http://mirrors.xbmc.org/releases/source/$name-$version.tar.gz)
-depends=(boost util-linux glew libmad libsamplerate lzo libmpeg2 fribidi libcdio
-         wavpack libmms mysql libmodplug faad2 samba SDL_mixer jasper
-         SDL_image enca libmicrohttpd yasm libass yajl gettext)
+source=(http://mirrors.xbmc.org/releases/source/$name-$version.tar.gz
+        xbmc-arch-fix.patch)
+depends=(boost
+         bzip2
+         curl
+         enca
+         faad2
+         fribidi
+         gettext
+         glew
+         jasper
+         libass
+         libcdio
+         libjpeg
+         libmad
+         libmicrohttpd
+         libmms
+         libmodplug
+         libmpeg2
+         libpcre
+         libsamplerate
+         libtiff
+         libusb
+         lzo
+         mysql
+         python
+         samba
+         SDL_mixer
+         SDL_image
+         systemd
+         sqlite
+         util-linux
+         yasm
+         yajl
+         wavpack)
 
 build() {
    cd $name-$version
 
+   patch -p1 < $SRC/xbmc-arch-fix.patch
+
    ./bootstrap
 
-   ac_cv_lib_GL_main=yes \
+   ac_python_version="2.7" \
+   PYTHON_EXTRA_LIBS="-L$SYSROOT/usr/lib" \
+   PYTHON_EXTRA_LDFLAGS="-L$SYSROOT/usr/lib -lpython2.7" \
+   PYTHON_SITE_PKG="-L$SYSROOT/usr/lib/python/dist-packages" \
+   PYTHON_CPPFLAGS="-I$SYSROOT/usr/include/python" \
+   PYTHON_LDFLAGS="-L$SYSROOT/usr/lib" \
+   LDFLAGS="-L$SYSROOT/usr/lib" \
+   INCLUDES="-I$SYSROOT/usr/include" \
+   MYSQL_CONFIG=yes \
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --with-arch=armv6 \
+               --with-arch=arm \
                --with-cpu=arm1176jzf-s \
                --disable-debug
 
