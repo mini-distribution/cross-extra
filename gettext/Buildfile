@@ -1,0 +1,30 @@
+# Description: The GNU internationalization library
+# URL:         http://www.gnu.org/software/gettext/
+
+name=gettext
+version=0.18.1.1
+release=1
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+depends=(ncurses acl)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --mandir=/usr/share/man \
+               --disable-csharp \
+               --disable-{,native-}java \
+               --disable-nls \
+               --without-{emacs,git} \
+               --with-included-{glib,libcroco,libxml}
+
+   make -j $JOBS
+   make -j1 DESTDIR=$PKG install
+   rm -r $PKG/usr/share/{info,doc}
+   rm $PKG/usr/share/gettext/intl/{COPYING*,ChangeLog}
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
