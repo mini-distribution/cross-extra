@@ -1,0 +1,27 @@
+# Description: A free and open source (GPL) software media player and entertainment hub for digital media
+# URL: http://xbmc.org/
+
+name=xbmc
+version=11.0
+release=1
+source=(http://mirrors.xbmc.org/releases/source/$name-$version.tar.gz)
+depends=(boost util-linux glew libmad libsamplerate lzo libmpeg2 fribidi libcdio
+         wavpack libmms mysql libmodplug faad2 samba SDL_mixer jasper
+         SDL_image enca libmicrohttpd yasm libass yajl gettext)
+
+build() {
+   cd $name-$version
+
+   ./bootstrap
+
+   ac_cv_lib_GL_main=yes \
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --with-arch=armv6 \
+               --with-cpu=arm1176jzf-s \
+               --disable-debug
+
+   make
+   make DESTDIR=$PKG install
+}
