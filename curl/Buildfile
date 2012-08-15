@@ -1,0 +1,23 @@
+# Description: A tool for transfering files with URL syntax
+# URL: http://curl.haxx.se
+
+name=curl
+version=7.27.0
+release=1
+source=(http://curl.haxx.se/download/$name-$version.tar.bz2)
+depends=(openssl zlib)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --mandir=/usr/share
+  
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
