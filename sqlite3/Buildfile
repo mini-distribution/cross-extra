@@ -1,0 +1,24 @@
+# Description: SQL database engine
+# URL: http://www.sqlite.org/
+
+name=sqlite
+version=3.7.13
+release=1
+depends=(ncurses readline)
+
+source=(http://www.sqlite.org/$name-autoconf-3071300.tar.gz)
+
+build () {
+   cd $name-autoconf-3071300
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --mandir=/usr/share
+  
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
