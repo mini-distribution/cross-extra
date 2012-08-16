@@ -9,17 +9,19 @@ source=(
     entity.patch
 )
 
-shopt -s extglob
 build() {
-    soname=lib$name.$version.so
-    cd $name
-    patch -p0 -i ../entity.patch
-    mkdir -p $PKG/usr/include
-    install -m 0644 *.h $_
-    $HOST-g++ $CXXFLAGS -fPIC -shared -o $soname !(xmltest).cpp
-    install -D -m 0644 $soname $PKG/usr/lib/$soname
-    cd $PKG/usr/lib
-    ln -s $soname ${soname%%.*}.so
-    ln -s $soname ${soname%.*.*.so}.so
-    ln -s $soname ${soname%.*.so}.so
+   cd $name
+
+   patch -p0 -i $SRC/entity.patch
+
+   soname=lib$name.$version.so
+   mkdir -p $PKG/usr/include
+   install -m 0644 *.h $PKG/usr/include
+   $HOST-g++ -fPIC -shared -Wno-unknown-pragmas -Wno-format -O3 -DTIXML_USE_STL \
+             -o $soname tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp
+   install -D -m 0644 $soname $PKG/usr/lib/$soname
+   cd $PKG/usr/lib
+   ln -s $soname ${soname%%.*}.so
+   ln -s $soname ${soname%.*.*.so}.so
+   ln -s $soname ${soname%.*.so}.so
 }
