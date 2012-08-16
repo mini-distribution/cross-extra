@@ -1,0 +1,14 @@
+diff -Naur a/configure.in b/configure.in
+--- a/configure.in	2012-08-15 14:57:16.069541643 +0200
++++ b/configure.in	2012-08-15 15:26:34.645568034 +0200
+@@ -677,8 +677,8 @@
+ # platform common libraries
+ AC_CHECK_PROG(MYSQL_CONFIG, mysql_config, "yes", "no")
+ if test $MYSQL_CONFIG = "yes"; then
+-  INCLUDES="$INCLUDES `mysql_config --include`"
+-  MYSQL_LIBS=`mysql_config --libs`
++#  INCLUDES="$INCLUDES `mysql_config --include`"
++#  MYSQL_LIBS=`mysql_config --libs`
+   LIBS="$LIBS $MYSQL_LIBS"
+   AC_SUBST(MYSQL_LIBS)
+ else

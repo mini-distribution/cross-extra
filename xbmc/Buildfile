@@ -5,7 +5,7 @@ name=xbmc
 version=11.0
 release=1
 source=(http://mirrors.xbmc.org/releases/source/$name-$version.tar.gz
-        xbmc-arch-fix.patch)
+        xbmc-arch-fix.patch xbmc-mysql-fix.patch)
 depends=(boost
          bzip2
          curl
@@ -44,6 +44,7 @@ build() {
    cd $name-$version
 
    patch -p1 < $SRC/xbmc-arch-fix.patch
+   patch -p1 < $SRC/xbmc-mysql-fix.patch
 
    ./bootstrap
 
