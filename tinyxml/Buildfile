@@ -4,15 +4,15 @@
 name=tinyxml
 version=2.6.2
 release=1
-source=(
-    http://download.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.zip 
-    entity.patch
-)
+source=(http://download.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.zip 
+        enable-stl.patch
+        entity.patch)
 
 build() {
    cd $name
 
-   patch -p0 -i $SRC/entity.patch
+   patch -p0 < $SRC/entity.patch
+   patch -p1 < $SRC/enable-stl.patch
 
    soname=lib$name.$version.so
    mkdir -p $PKG/usr/include
