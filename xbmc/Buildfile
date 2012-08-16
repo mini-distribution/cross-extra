@@ -64,6 +64,7 @@ build() {
                --with-cpu=arm1176jzf-s \
                --disable-debug
 
-   make
+   make DVDREAD_CFLAGS="-I$SYSROOT/usr/include" \
+        DVDREAD_LIBS="-L$SYSROOT/usr/lib -ldvdread"
    make DESTDIR=$PKG install
 }
