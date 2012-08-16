@@ -67,3 +67,7 @@ build() {
    make
    make DESTDIR=$PKG install
 }
+
+check() {
+   check_tool zip
+}
