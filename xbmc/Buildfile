@@ -5,7 +5,8 @@ name=xbmc
 version=11.0
 release=1
 source=(http://mirrors.xbmc.org/releases/source/$name-$version.tar.gz
-        xbmc-arch-fix.patch xbmc-mysql-fix.patch)
+        xbmc-arch-fix.patch
+        xbmc-mysql-fix.patch)
 depends=(boost
          bzip2
          curl
@@ -62,10 +63,13 @@ build() {
                --prefix=/usr \
                --with-arch=arm \
                --with-cpu=arm1176jzf-s \
-               --disable-debug
+               --disable-debug \
+               --disable-rsxs
 
    make DVDREAD_CFLAGS="-I$SYSROOT/usr/include" \
-        DVDREAD_LIBS="-L$SYSROOT/usr/lib -ldvdread"
+        DVDREAD_LIBS="-L$SYSROOT/usr/lib -ldvdread" \
+        PNG_CFLAGS="-I$SYSROOT/usr/include" \
+        PNG_LIBS="-L$SYSROOT/usr/lib"
    make DESTDIR=$PKG install
 }
 
