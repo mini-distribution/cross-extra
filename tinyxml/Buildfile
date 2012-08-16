@@ -1,0 +1,25 @@
+# Description: simple, small, C++ XML parser
+# URL:         http://www.grinninglizard.com/tinyxml/
+
+name=tinyxml
+version=2.6.2
+release=1
+source=(
+    http://download.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.zip 
+    entity.patch
+)
+
+shopt -s extglob
+build() {
+    soname=lib$name.$version.so
+    cd $name
+    patch -p0 -i ../entity.patch
+    mkdir -p $PKG/usr/include
+    install -m 0644 *.h $_
+    $HOST-g++ $CXXFLAGS -fPIC -shared -o $soname !(xmltest).cpp
+    install -D -m 0644 $soname $PKG/usr/lib/$soname
+    cd $PKG/usr/lib
+    ln -s $soname ${soname%%.*}.so
+    ln -s $soname ${soname%.*.*.so}.so
+    ln -s $soname ${soname%.*.so}.so
+}
