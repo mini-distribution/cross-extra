@@ -2,9 +2,9 @@
 # URL: http://xbmc.org/
 
 name=xbmc
-version=11.0
+version=xbmc-rbp-efef226
 release=1
-source=(http://mirrors.xbmc.org/releases/source/$name-$version.tar.gz
+source=(http://www.buildgear.org/mirror/raspberrypi/$name-$version.tar.gz
         xbmc-arch-fix.patch
         xbmc-mysql-fix.patch)
 depends=(boost
@@ -36,6 +36,7 @@ depends=(boost
          SDL_image
          systemd
          sqlite
+         tinyxml
          util-linux
          yasm
          yajl
@@ -43,9 +44,6 @@ depends=(boost
 
 build() {
    cd $name-$version
-
-   patch -p1 < $SRC/xbmc-arch-fix.patch
-   patch -p1 < $SRC/xbmc-mysql-fix.patch
 
    ./bootstrap
 
@@ -62,15 +60,17 @@ build() {
                --host=$HOST \
                --prefix=/usr \
                --with-arch=arm \
-               --with-cpu=arm1176jzf-s \
                --disable-debug \
-               --disable-rsxs
+               --disable-rsxs \
+               --with-platform=raspberry-pi \
+               --disable-webserver
 
    make DVDREAD_CFLAGS="-I$SYSROOT/usr/include" \
         DVDREAD_LIBS="-L$SYSROOT/usr/lib -ldvdread" \
         PNG_CFLAGS="-I$SYSROOT/usr/include" \
-        PNG_LIBS="-L$SYSROOT/usr/lib"
-   make DESTDIR=$PKG install
+        PNG_LIBS="-L$SYSROOT/usr/lib" \
+        V=1
+#   make DESTDIR=$PKG install
 }
 
 check() {
