@@ -69,5 +69,6 @@ build() {
 }
 
 check() {
+   check_tool autopoint
    check_tool zip
 }
