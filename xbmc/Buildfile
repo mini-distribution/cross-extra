@@ -68,3 +68,8 @@ build() {
         DVDREAD_LIBS="-L$SYSROOT/usr/lib -ldvdread"
    make DESTDIR=$PKG install
 }
+
+check() {
+   check_tool autopoint
+   check_tool zip
+}
