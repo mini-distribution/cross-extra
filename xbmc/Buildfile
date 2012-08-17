@@ -5,8 +5,7 @@ name=xbmc
 version=xbmc-rbp-efef226
 release=1
 source=(http://www.buildgear.org/mirror/raspberrypi/$name-$version.tar.gz
-        xbmc-arch-fix.patch
-        xbmc-mysql-fix.patch)
+        xbmc-omxplayer-stringutils-fix.patch)
 depends=(boost
          bzip2
          curl
@@ -25,6 +24,7 @@ depends=(boost
          libmodplug
          libmpeg2
          libpcre
+         libpng
          libsamplerate
          libtiff
          libusb
@@ -32,27 +32,27 @@ depends=(boost
          mysql
          python
          samba
-         SDL_mixer
-         SDL_image
          systemd
          sqlite
          tinyxml
          util-linux
          yasm
          yajl
-         wavpack)
+         wavpack
+         vc)
 
 build() {
    cd $name-$version
 
+   patch -p1 < $SRC/xbmc-omxplayer-stringutils-fix.patch
+
    ./bootstrap
 
-   ac_python_version="2.7" \
-   PYTHON_EXTRA_LIBS="-L$SYSROOT/usr/lib" \
-   PYTHON_EXTRA_LDFLAGS="-L$SYSROOT/usr/lib -lpython2.7" \
-   PYTHON_SITE_PKG="-L$SYSROOT/usr/lib/python/dist-packages" \
+   PYTHON_VERSION="2.7" \
+   PYTHON_SITE_PKG="$SYSROOT/usr/lib/python2.7/site-packages" \
    PYTHON_CPPFLAGS="-I$SYSROOT/usr/include/python" \
-   PYTHON_LDFLAGS="-L$SYSROOT/usr/lib" \
+   PYTHON_LDFLAGS="-L$SYSROOT/usr/lib -lpython2.7 -lpthread -ldl -lutil -lm" \
+   PYTHON_NOVERSIONCHECK="no-check" \
    LDFLAGS="-L$SYSROOT/usr/lib" \
    INCLUDES="-I$SYSROOT/usr/include" \
    MYSQL_CONFIG=yes \
@@ -63,17 +63,32 @@ build() {
                --disable-debug \
                --disable-rsxs \
                --with-platform=raspberry-pi \
-               --disable-webserver
+               --disable-webserver \
+               --enable-gles \
+               --disable-sdl \
+               --disable-x11 \
+               --disable-xrandr \
+               --disable-openmax \
+               --disable-optical-drive \
+               --disable-dvdcss \
+               --disable-joystick \
+               --disable-crystalhd \
+               --disable-vtbdecoder \
+               --disable-vaapi \
+               --disable-vdpau \
+               --disable-pulse \
+               --disable-projectm \
+               --disable-optimizations
 
    make DVDREAD_CFLAGS="-I$SYSROOT/usr/include" \
         DVDREAD_LIBS="-L$SYSROOT/usr/lib -ldvdread" \
         PNG_CFLAGS="-I$SYSROOT/usr/include" \
-        PNG_LIBS="-L$SYSROOT/usr/lib" \
-        V=1
-#   make DESTDIR=$PKG install
+        PNG_LIBS="-L$SYSROOT/usr/lib"
+   make DESTDIR=$PKG install
 }
 
 check() {
    check_tool autopoint
    check_tool zip
+   # TODO: Add checks for liblzo2-dev liblzo2-2 libsdl-image1.2-dev
 }

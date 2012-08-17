@@ -1,0 +1,11 @@
+diff -Naur a/xbmc/cores/omxplayer/OMXPlayer.cpp b/xbmc/cores/omxplayer/OMXPlayer.cpp
+--- a/xbmc/cores/omxplayer/OMXPlayer.cpp	2012-08-04 21:37:45.000000000 +0200
++++ b/xbmc/cores/omxplayer/OMXPlayer.cpp	2012-08-17 12:38:42.211100788 +0200
+@@ -44,6 +44,7 @@
+ #include "utils/URIUtils.h"
+ #include "utils/XMLUtils.h"
+ #include "utils/Variant.h"
++#include "utils/StringUtils.h"
+ 
+ #include "FileItem.h"
+ #include "filesystem/File.h"
