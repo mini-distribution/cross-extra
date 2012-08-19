@@ -9,11 +9,12 @@ source=(http://www.buildgear.org/mirror/raspberrypi/$name-$version.tar.gz
 depends=(boost
          bzip2
          curl
+         dbus
          enca
          faad2
+         flac
          fribidi
          gettext
-         glew
          jasper
          libass
          libcdio
@@ -23,11 +24,13 @@ depends=(boost
          libmms
          libmodplug
          libmpeg2
+         libogg
          libpcre
          libpng
          libsamplerate
          libtiff
          libusb
+         libvorbis
          lzo
          mysql
          python
@@ -90,5 +93,6 @@ build() {
 check() {
    check_tool autopoint
    check_tool zip
-   # TODO: Add checks for liblzo2-dev liblzo2-2 libsdl-image1.2-dev
+   check_lib /usr/include/lzo/lzo2a.h
+   check_lib /usr/include/SDL/SDL_image.h
 }
