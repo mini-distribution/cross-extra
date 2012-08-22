@@ -1,0 +1,21 @@
+# Description: Linux Framebuffer setup utility
+# URL: http://users.telenet.be/geertu/Linux/fbdev/
+
+name=fbset
+version=2.1
+release=1
+source=(http://users.telenet.be/geertu/Linux/fbdev/$name-$version.tar.gz)
+depends=(glib)
+
+build() {
+   cd $name-$version
+  
+   make CC="$HOST-gcc -Wall -O2 -I."
+
+   mkdir -p $PKG/usr/sbin
+   mkdir -p $PKG/usr/share/man/man{5,8}
+
+   install fbset $PKG/usr/sbin
+   install fbset.8 $PKG/usr/share/man/man8
+   install fb.modes.5 $PKG/usr/share/man/man5
+}
