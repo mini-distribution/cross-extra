@@ -1,0 +1,25 @@
+# Description: The Mesa 3D Graphics Demos and Utilities
+# URL: http://www.mesa3d.org
+
+
+name=mesa-demos
+version=8.0.1
+release=1
+source=(ftp://ftp.freedesktop.org/pub/mesa/demos/$version/$name-$version.tar.bz2
+        LICENSE)
+depends=(glew)
+
+build() {
+   cd $SRC/$name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+
+   make DESTDIR=$PKG install
+   
+   mkdir -p $PKG/usr{,/share/mesa-demos}
+   cp $SRC/LICENSE $PKG/usr/share/mesa-demos
+}
