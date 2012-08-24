@@ -1,0 +1,16 @@
+# Description: Dallas semiconductors one-wire UART modulated driver
+# URL: http://www.digitemp.com/software.shtml
+
+name=digitemp
+version=3.6.0
+release=1
+source=(http://www.digitemp.com/software/linux/$name-$version.tar.gz)
+depends=(libusb)
+
+build() {
+    cd $name-$version
+
+    make CC="$HOST-gcc" ds9097u
+    mkdir -p $PKG/usr/bin
+    install -m 0755 digitemp_DS9097U $PKG/usr/bin/digitemp
+}
