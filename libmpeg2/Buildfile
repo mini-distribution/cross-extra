@@ -1,11 +1,11 @@
-# Description: MPEG1/MPEG2 decoder (includes libmpeg2)
+# Description: MPEG1/MPEG2 decoder library
 # URL:         http://libmpeg2.sourceforge.net/
 
 name=libmpeg2
 version=0.5.1
 release=1
 source=(http://$name.sourceforge.net/files/$name-$version.tar.gz)
-depends=(libsdl libXv)
+depends=(libsdl libXv libX11 libXext)
 
 build () {
    cd $name-$version
@@ -13,11 +13,11 @@ build () {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --mandir=/usr/share/man \
-               --with-gnu-ld --enable-shared \
                --disable-nls
 
-   make -j $JOBS
+   make -j $JOBS \
+   LIBVO_CFLAGS="-I$SYSROOT/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT" \
+   LIBVO_LIBS="-lXext -lX11 -lXv -lSDL"
    make DESTDIR=$PKG install
 
    # Fix libtool files
