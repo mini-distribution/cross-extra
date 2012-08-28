@@ -1,0 +1,15 @@
+# Description: High-quality MPEG Audio Decoder library.
+# URL: http://www.underbit.com/products/mad/
+
+name=librtmp
+version=git-e0056c5
+release=1
+source=(http://buildgear.org/mirror/raspberrypi/rtmpdump-$version.tar.xz)
+depends=openssl
+
+build() {
+   cd rtmpdump-$version/librtmp
+
+   make CROSS_COMPILE=$HOST- INC=-I$SYSROOT/usr/include
+   make DESTDIR=$PKG install
+}
