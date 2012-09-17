@@ -13,15 +13,13 @@ build() {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --mandir=/usr/man \
                --disable-gcc-pipe \
                --disable-dependency-tracking
 
    make -j $JOBS
    make DESTDIR=$PKG install
 
-   rm -r $PKG/usr/share/doc
-   rmdir $PKG/usr/share
+   rm -r $PKG/usr/share
 
    # Fix libtool files
    fix_la_files $PKG

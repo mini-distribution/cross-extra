@@ -6,8 +6,8 @@ drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libsamplerate.a
 -rwxr-xr-x	root/root	usr/lib/libsamplerate.la
-lrwxrwxrwx	root/root	usr/lib/libsamplerate.so
-lrwxrwxrwx	root/root	usr/lib/libsamplerate.so.0
 -rwxr-xr-x	root/root	usr/lib/libsamplerate.so.0.1.8
+lrwxrwxrwx	root/root	usr/lib/libsamplerate.so.0 -> libsamplerate.so.0.1.8
+lrwxrwxrwx	root/root	usr/lib/libsamplerate.so -> libsamplerate.so.0.1.8
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/samplerate.pc
