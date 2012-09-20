@@ -2,16 +2,15 @@
 # URL:         http://www.samba.org
 
 name=samba
-version=3.6.7
+version=3.6.8
 release=1
 source=(http://www.samba.org/samba/ftp/stable/$name-$version.tar.gz
-        samba-config.patch)
+        smb.conf
+	smbd.service)
 depends=(ncurses openssl readline zlib tdb talloc libcap acl)
 
 build () {
    cd $name-$version/source3
-
-   patch -d .. -p1 -i $SRC/samba-config.patch
 
    export samba_cv_HAVE_GETTIMEOFDAY_TZ=yes
    export samba_cv_USE_SETEUID=yes
@@ -55,8 +54,8 @@ build () {
     install -d -m 1777 $PKG/var/spool/samba
 
     # config-file and init script
-    install -m 600 ../examples/smb.conf.default $PKG/etc/samba
-#    install -D -m 755  $SRC/samba $PKG/etc/rc.d/samba
+    install -m 600 $SRC/smb.conf $PKG/etc/samba/smb.conf
+    install -D $SRC/smbd.service $PKG/etc/systemd/system/smbd.service
 
     # cleanup
     rm $PKG/usr/share/man/man8/{swat.8,tdb*.8}
