@@ -1,7 +1,7 @@
-diff -r baec1efc87a4 gfx/thebes/gfxPlatform.cpp
---- a/gfx/thebes/gfxPlatform.cpp	Sun Mar 04 00:38:41 2012 +0000
-+++ b/gfx/thebes/gfxPlatform.cpp	Wed May 16 17:37:10 2012 +0200
-@@ -448,21 +448,19 @@ gfxPlatform::CreateDrawTargetForSurface(
+diff --git a/gfx/thebes/gfxPlatform.cpp b/gfx/thebes/gfxPlatform.cpp
+--- a/gfx/thebes/gfxPlatform.cpp
++++ b/gfx/thebes/gfxPlatform.cpp
+@@ -484,21 +484,19 @@ gfxPlatform::CreateDrawTargetForSurface(
  
  cairo_user_data_key_t kSourceSurface;
  
@@ -25,25 +25,26 @@ diff -r baec1efc87a4 gfx/thebes/gfxPlatform.cpp
  {
    void *userData = aSurface->GetData(&kSourceSurface);
  
-@@ -524,24 +522,18 @@ gfxPlatform::GetSourceSurfaceForSurface(
-         NS_RUNTIMEABORT("Invalid surface format!");
-     }
+@@ -588,24 +586,19 @@ gfxPlatform::GetSourceSurfaceForSurface(
+       }
  
-     srcBuffer = aTarget->CreateSourceSurfaceFromData(imgSurface->Data(),
-                                                      IntSize(imgSurface->GetSize().width, imgSurface->GetSize().height),
-                                                      imgSurface->Stride(),
-                                                      format);
+       srcBuffer = Factory::CreateWrappingDataSourceSurface(imgSurface->Data(),
+                                                            imgSurface->Stride(),
+                                                            size, format);
+ 
+     }
  
 -    cairo_surface_t *nullSurf =
 -	cairo_null_surface_create(CAIRO_CONTENT_COLOR_ALPHA);
 -    cairo_surface_set_user_data(nullSurf,
--				&kSourceSurface,
--				imgSurface,
--				NULL);
+-                                &kSourceSurface,
+-                                imgSurface,
+-                                NULL);
 -    cairo_surface_attach_snapshot(imgSurface->CairoSurface(), nullSurf, SourceSnapshotDetached);
 -    cairo_surface_destroy(nullSurf);
 +    cairo_surface_set_mime_data(imgSurface->CairoSurface(), "mozilla/magic",
-+		(const unsigned char *) "data", 4, SourceSnapshotDetached, imgSurface.get());
++                                (const unsigned char *) "data", 4,
++                                SourceSnapshotDetached, imgSurface.get());
    }
  
    srcBuffer->AddRef();
@@ -51,4 +52,3 @@ diff -r baec1efc87a4 gfx/thebes/gfxPlatform.cpp
  
    return srcBuffer;
  }
- 

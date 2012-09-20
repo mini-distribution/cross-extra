@@ -18,8 +18,8 @@ ac_add_options --disable-embedding-tests
 ac_add_options --disable-accessibility
 ac_add_options --disable-vista-sdk-requirements
 ac_add_options --disable-libnotify
-ac_add_options --disable-ogg
-ac_add_options --disable-wave
+#ac_add_options --disable-ogg
+#ac_add_options --disable-wave
 ac_add_options --disable-webm
 ac_add_options --disable-necko-wifi
 ac_add_options --disable-crashreporter
