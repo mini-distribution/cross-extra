@@ -6,7 +6,7 @@ name=mysql
 version=5.5.27
 release=1
 source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/$name-$version.tar.gz \
-        my.cnf mysql_va_list.patch)
+        my.cnf mysql_va_list.patch mysqld.service)
 depends=(openssl zlib libaio ncurses tcp_wrappers)
 
 build () {
@@ -22,7 +22,7 @@ build () {
    rm CMakeCache.txt
    make clean
 
-   export PATH=$SRC:$PATH
+   export PATH=$SRC:$SRC/storage/perfschema/:$PATH
 
    cmake -DCMAKE_INSTALL_PREFIX=/usr \
          -DCMAKE_SYSTEM_NAME=Linux \
@@ -60,11 +60,13 @@ build () {
 #        -DBUILD_CONFIG=mysql_release \
 #        -DMYSQL_DATADIR=$DEST/data
 
-   make
+   make -j$JOBS
    make DESTDIR=$PKG install
 
    rm -r $PKG/usr/share/{mysql-test,info}
    rm $PKG/usr/share/mysql/charsets/README
+
+   install -D $SRC/mysqld.service $PKG/etc/systemd/system/mysqld.service
 #   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
 
 #   install -d  $PKG/var/{lib,log}
