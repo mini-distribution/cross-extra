@@ -280,3 +280,6 @@ drwxr-xr-x	root/root	usr/share/mysql/swedish/
 -rw-r--r--	root/root	usr/share/mysql/swedish/errmsg.sys   
 drwxr-xr-x	root/root	usr/share/mysql/ukrainian/   
 -rw-r--r--	root/root	usr/share/mysql/ukrainian/errmsg.sys   
+drwxr-xr-x	root/root	var/   
+drwxr-xr-x	root/root	var/lib/   
+drwxr-xr-x	root/root	var/lib/mysql/   

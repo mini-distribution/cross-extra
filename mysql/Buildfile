@@ -22,7 +22,7 @@ build () {
    rm CMakeCache.txt
    make clean
 
-   export PATH=$SRC:$SRC/storage/perfschema/:$PATH
+   export PATH=$SRC:$PATH
 
    cmake -DCMAKE_INSTALL_PREFIX=/usr \
          -DCMAKE_SYSTEM_NAME=Linux \
@@ -66,6 +66,7 @@ build () {
    rm -r $PKG/usr/share/{mysql-test,info}
    rm $PKG/usr/share/mysql/charsets/README
 
+   install -d $PKG/var/lib/mysql
    install -D $SRC/mysqld.service $PKG/etc/systemd/system/mysqld.service
 #   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
 

@@ -2,9 +2,8 @@
 Description=MySQL Server
 
 [Service]
-User=mysql
-ExecStart=/usr/bin/mysqld --user=mysql
-ExecStartPost=/usr/bin/mysqld-post
+User=root
+ExecStart=/usr/sbin/mysqld --user=root
 Restart=always
 
 [Install]
