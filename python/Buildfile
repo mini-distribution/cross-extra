@@ -3,7 +3,7 @@
 # Depends on: db gdbm ncurses openssl readline bzip2 zlib
 
 name=python
-version=2.7.2
+version=2.7.3
 release=1
 source=(http://www.python.org/ftp/$name/$version/Python-$version.tar.bz2 \
         $name-$version-xcompile.patch)

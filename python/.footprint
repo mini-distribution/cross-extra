@@ -3,13 +3,14 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/2to3
 -rwxr-xr-x	root/root	usr/bin/idle
 -rwxr-xr-x	root/root	usr/bin/pydoc
-lrwxrwxrwx	root/root	usr/bin/python
 -rwxr-xr-x	root/root	usr/bin/python2.7
 -rwxr-xr-x	root/root	usr/bin/python2.7-config
-lrwxrwxrwx	root/root	usr/bin/python-config
+lrwxrwxrwx	root/root	usr/bin/python2-config -> python2.7-config
+lrwxrwxrwx	root/root	usr/bin/python2 -> python2.7
+lrwxrwxrwx	root/root	usr/bin/python-config -> python2-config
+lrwxrwxrwx	root/root	usr/bin/python -> python2.7
 -rwxr-xr-x	root/root	usr/bin/smtpd.py
 drwxr-xr-x	root/root	usr/include/
-lrwxrwxrwx	root/root	usr/include/python
 drwxr-xr-x	root/root	usr/include/python2.7/
 -rw-r--r--	root/root	usr/include/python2.7/abstract.h
 -rw-r--r--	root/root	usr/include/python2.7/asdl.h
@@ -103,13 +104,14 @@ drwxr-xr-x	root/root	usr/include/python2.7/
 -rw-r--r--	root/root	usr/include/python2.7/unicodeobject.h
 -rw-r--r--	root/root	usr/include/python2.7/warnings.h
 -rw-r--r--	root/root	usr/include/python2.7/weakrefobject.h
+lrwxrwxrwx	root/root	usr/include/python -> python2.7
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libpython2.7.so
 -rwxr-xr-x	root/root	usr/lib/libpython2.7.so.1.0
+lrwxrwxrwx	root/root	usr/lib/libpython2.7.so -> libpython2.7.so.1.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/python-2.7.pc
-lrwxrwxrwx	root/root	usr/lib/pkgconfig/python.pc
-lrwxrwxrwx	root/root	usr/lib/python
+lrwxrwxrwx	root/root	usr/lib/pkgconfig/python2.pc -> python-2.7.pc
+lrwxrwxrwx	root/root	usr/lib/pkgconfig/python.pc -> python2.pc
 drwxr-xr-x	root/root	usr/lib/python2.7/
 -rw-r--r--	root/root	usr/lib/python2.7/_abcoll.py
 -rw-r--r--	root/root	usr/lib/python2.7/_abcoll.pyc
@@ -172,7 +174,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/config/
 -rw-r--r--	root/root	usr/lib/python2.7/config/config.c.in
 -rwxr-xr-x	root/root	usr/lib/python2.7/config/install-sh
 -rw-r--r--	root/root	usr/lib/python2.7/config/libpython2.7.a
-lrwxrwxrwx	root/root	usr/lib/python2.7/config/libpython2.7.so
+lrwxrwxrwx	root/root	usr/lib/python2.7/config/libpython2.7.so -> /usr/lib/libpython2.7.so
 -rw-r--r--	root/root	usr/lib/python2.7/config/Makefile
 -rwxr-xr-x	root/root	usr/lib/python2.7/config/makesetup
 -rw-r--r--	root/root	usr/lib/python2.7/ConfigParser.py
@@ -662,6 +664,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_io.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/itertools.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_json.so
+-rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/linuxaudiodev.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_locale.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_lsprof.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/math.so
@@ -670,9 +673,10 @@ drwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_multibytecodec.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_multiprocessing.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/operator.so
+-rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/ossaudiodev.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/parser.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/pyexpat.so
--rw-r--r--	root/root	usr/lib/python2.7/lib-dynload/Python-2.7.2-py2.7.egg-info
+-rw-r--r--	root/root	usr/lib/python2.7/lib-dynload/Python-2.7.3-py2.7.egg-info
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/_random.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/resource.so
 -rwxr-xr-x	root/root	usr/lib/python2.7/lib-dynload/select.so
@@ -783,8 +787,12 @@ drwxr-xr-x	root/root	usr/lib/python2.7/multiprocessing/dummy/
 -rw-r--r--	root/root	usr/lib/python2.7/pipes.py
 -rw-r--r--	root/root	usr/lib/python2.7/pkgutil.py
 -rwxr-xr-x	root/root	usr/lib/python2.7/platform.py
-drwxr-xr-x	root/root	usr/lib/python2.7/plat-linux3/
--rw-r--r--	root/root	usr/lib/python2.7/plat-linux3/regen
+drwxr-xr-x	root/root	usr/lib/python2.7/plat-linux2/
+-rw-r--r--	root/root	usr/lib/python2.7/plat-linux2/CDROM.py
+-rw-r--r--	root/root	usr/lib/python2.7/plat-linux2/DLFCN.py
+-rw-r--r--	root/root	usr/lib/python2.7/plat-linux2/IN.py
+-rwxr-xr-x	root/root	usr/lib/python2.7/plat-linux2/regen
+-rw-r--r--	root/root	usr/lib/python2.7/plat-linux2/TYPES.py
 -rw-r--r--	root/root	usr/lib/python2.7/plistlib.py
 -rw-r--r--	root/root	usr/lib/python2.7/popen2.py
 -rw-r--r--	root/root	usr/lib/python2.7/poplib.py
@@ -914,6 +922,10 @@ drwxr-xr-x	root/root	usr/lib/python2.7/test/cjkencodings/
 -rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/gbk-utf8.txt
 -rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/hz.txt
 -rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/hz-utf8.txt
+-rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/iso2022_jp.txt
+-rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/iso2022_jp-utf8.txt
+-rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/iso2022_kr.txt
+-rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/iso2022_kr-utf8.txt
 -rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/johab.txt
 -rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/johab-utf8.txt
 -rw-r--r--	root/root	usr/lib/python2.7/test/cjkencodings/shift_jis.txt
@@ -1088,6 +1100,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/test/decimaltestdata/
 -rw-r--r--	root/root	usr/lib/python2.7/test/lock_tests.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/mapping_tests.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/math_testcases.txt
+-rw-r--r--	root/root	usr/lib/python2.7/test/nokia.pem
 -rw-r--r--	root/root	usr/lib/python2.7/test/nullcert.pem
 -rw-r--r--	root/root	usr/lib/python2.7/test/outstanding_bugs.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/pickletester.py
@@ -1099,7 +1112,6 @@ drwxr-xr-x	root/root	usr/lib/python2.7/test/decimaltestdata/
 -rw-r--r--	root/root	usr/lib/python2.7/test/randv2_32.pck
 -rw-r--r--	root/root	usr/lib/python2.7/test/randv2_64.pck
 -rw-r--r--	root/root	usr/lib/python2.7/test/randv3.pck
--rw-r--r--	root/root	usr/lib/python2.7/test/regex_tests.py
 -rwxr-xr-x	root/root	usr/lib/python2.7/test/regrtest.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/relimport.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/reperf.py
@@ -1116,7 +1128,6 @@ drwxr-xr-x	root/root	usr/lib/python2.7/test/decimaltestdata/
 -rw-r--r--	root/root	usr/lib/python2.7/test/string_tests.py
 drwxr-xr-x	root/root	usr/lib/python2.7/test/subprocessdata/
 -rw-r--r--	root/root	usr/lib/python2.7/test/subprocessdata/sigchild_ignore.py
--rw-r--r--	root/root	usr/lib/python2.7/test/svn_python_org_https_cert.pem
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_abc.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_abstract_numbers.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_aepack.py
@@ -1168,6 +1179,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/test/subprocessdata/
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_codeccallbacks.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_codecencodings_cn.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_codecencodings_hk.py
+-rw-r--r--	root/root	usr/lib/python2.7/test/test_codecencodings_iso2022.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_codecencodings_jp.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_codecencodings_kr.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_codecencodings_tw.py
@@ -1389,6 +1401,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/test/subprocessdata/
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_pwd.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_py3kwarn.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_pyclbr.py
+-rw-r--r--	root/root	usr/lib/python2.7/test/test_py_compile.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_pydoc.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_pyexpat.py
 -rw-r--r--	root/root	usr/lib/python2.7/test/test_queue.py
@@ -1638,6 +1651,7 @@ drwxr-xr-x	root/root	usr/lib/python2.7/xml/sax/
 -rw-r--r--	root/root	usr/lib/python2.7/xml/sax/saxutils.py
 -rw-r--r--	root/root	usr/lib/python2.7/xml/sax/xmlreader.py
 -rw-r--r--	root/root	usr/lib/python2.7/zipfile.py
+lrwxrwxrwx	root/root	usr/lib/python -> python2.7
 drwxr-xr-x	root/root	usr/share/
 drwxr-xr-x	root/root	usr/share/man/
 drwxr-xr-x	root/root	usr/share/man/man1/
