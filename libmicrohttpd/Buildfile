@@ -2,7 +2,7 @@
 # URL: http://www.gnu.org/software/libmicrohttpd/
 
 name=libmicrohttpd
-version=0.9.21
+version=0.9.22
 release=1
 source=(http://ftp.club.cc.cmu.edu/pub/gnu/$name/$name-$version.tar.gz)
 
