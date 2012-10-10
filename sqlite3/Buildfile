@@ -2,14 +2,14 @@
 # URL: http://www.sqlite.org/
 
 name=sqlite
-version=3.7.13
+version=3.7.14.1
 release=1
 depends=(ncurses readline)
 
-source=(http://www.sqlite.org/$name-autoconf-3071300.tar.gz)
+source=(http://www.sqlite.org/$name-autoconf-3071401.tar.gz)
 
 build () {
-   cd $name-autoconf-3071300
+   cd $name-autoconf-3071401
 
    ./configure --build=$BUILD \
                --host=$HOST \
