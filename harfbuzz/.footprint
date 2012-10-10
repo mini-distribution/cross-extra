@@ -1,5 +1,8 @@
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
+-rwxr-xr-x	root/root	usr/bin/hb-ot-shape-closure
+-rwxr-xr-x	root/root	usr/bin/hb-shape
+-rwxr-xr-x	root/root	usr/bin/hb-view
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/harfbuzz/
 -rw-r--r--	root/root	usr/include/harfbuzz/hb-blob.h
@@ -7,6 +10,8 @@ drwxr-xr-x	root/root	usr/include/harfbuzz/
 -rw-r--r--	root/root	usr/include/harfbuzz/hb-common.h
 -rw-r--r--	root/root	usr/include/harfbuzz/hb-font.h
 -rw-r--r--	root/root	usr/include/harfbuzz/hb-ft.h
+-rw-r--r--	root/root	usr/include/harfbuzz/hb-glib.h
+-rw-r--r--	root/root	usr/include/harfbuzz/hb-gobject.h
 -rw-r--r--	root/root	usr/include/harfbuzz/hb.h
 -rw-r--r--	root/root	usr/include/harfbuzz/hb-ot.h
 -rw-r--r--	root/root	usr/include/harfbuzz/hb-ot-layout.h
