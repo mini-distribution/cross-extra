@@ -2,10 +2,10 @@
 # URL: http://www.gtk.org/
 
 name=gtk3
-version=3.4.4
+version=3.6.0
 release=1
-source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/3.4/gtk+-$version.tar.xz)
-depends=(atk gdk-pixbuf hicolor-icon-theme libtiff pango libSM libXcursor libXrandr libXi)
+source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/3.6/gtk+-$version.tar.xz)
+depends=(atk at-spi2-atk gdk-pixbuf hicolor-icon-theme libtiff pango libSM libXcursor libXrandr libXi)
 
 build () {
    cd gtk+-$version
@@ -22,7 +22,7 @@ build () {
    make -j $JOBS
    make DESTDIR=$PKG install
 
-   rm -r $PKG/usr/share/{locale,gtk-doc} 
+   rm -r $PKG/usr/share/{locale,gtk-doc,gtk-3.0,glib-2.0} 
 
    # Fix libtool files
    fix_la_files $PKG
