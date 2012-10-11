@@ -1,0 +1,14 @@
+[Unit]
+Description=MySQL Server installation
+Requires=mysqld.service
+ConditionPathExists=/usr/bin/install_mysql
+
+[Service]
+User=root
+ExecStart=/usr/bin/install_mysql
+ExecStartPost=/bin/rm /usr/bin/install_mysql
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=mysqld.service
