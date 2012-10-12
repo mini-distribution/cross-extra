@@ -1,0 +1,11 @@
+[Unit]
+Description=Pango modules initialization
+ConditionPathExists=!/usr/etc/pango/pango.modules
+
+[Service]
+ExecStart=/bin/bash -c '/bin/pango-querymodules > /usr/etc/pango/pango.modules'
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

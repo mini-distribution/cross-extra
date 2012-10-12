@@ -4,7 +4,8 @@
 name=pango
 version=1.32.1
 release=1
-source=(http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz)
+source=(http://download.gnome.org/sources/$name/${version%.*}/$name-$version.tar.xz
+        pango.service)
 depends=(cairo glib libSM libXext libXft libpng harfbuzz)
 
 build () {
@@ -18,6 +19,12 @@ build () {
    make DESTDIR=$PKG install
 
    rm -r $PKG/usr/share/gtk-doc
+
+   #Install dir for pango.modules
+   install -d $PKG/usr/etc/pango
+
+   #Install module initialization service
+   install -D $SRC/pango.service $PKG/etc/systemd/system/pango.service
 
    # Fix libtool files
    fix_la_files $PKG
