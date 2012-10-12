@@ -2,7 +2,7 @@
 # URL: http://www.mozilla.org
 
 name=firefox
-version=15.0.1
+version=16.0.1
 release=1
 source=(http://releases.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
         firefox.mozconfig system_cairo.patch)

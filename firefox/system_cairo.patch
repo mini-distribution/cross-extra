@@ -1,7 +1,7 @@
 diff --git a/gfx/thebes/gfxPlatform.cpp b/gfx/thebes/gfxPlatform.cpp
 --- a/gfx/thebes/gfxPlatform.cpp
 +++ b/gfx/thebes/gfxPlatform.cpp
-@@ -484,21 +484,19 @@ gfxPlatform::CreateDrawTargetForSurface(
+@@ -491,21 +491,19 @@ gfxPlatform::CreateDrawTargetForSurface(
  
  cairo_user_data_key_t kSourceSurface;
  
@@ -25,7 +25,7 @@ diff --git a/gfx/thebes/gfxPlatform.cpp b/gfx/thebes/gfxPlatform.cpp
  {
    void *userData = aSurface->GetData(&kSourceSurface);
  
-@@ -588,24 +586,19 @@ gfxPlatform::GetSourceSurfaceForSurface(
+@@ -592,24 +590,19 @@ gfxPlatform::GetSourceSurfaceForSurface(
        }
  
        srcBuffer = Factory::CreateWrappingDataSourceSurface(imgSurface->Data(),
