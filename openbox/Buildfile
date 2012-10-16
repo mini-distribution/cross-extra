@@ -4,7 +4,8 @@
 name=openbox
 version=3.5.0
 release=1
-source=(http://openbox.org/dist/openbox/openbox-$version.tar.gz)
+source=(http://openbox.org/dist/openbox/openbox-$version.tar.gz
+        openbox.service xinitrc)
 depends=(libXrandr libSM glib libxml2 pango)
 
 build() {
@@ -21,6 +22,9 @@ build() {
 
    mv $PKG/usr/share/doc/$name/*.xsd $PKG/usr/etc/xdg/$name
    rm -rf $PKG/usr/share/doc
+
+   install -D -m644 $SRC/xinitrc $PKG/root/.xinitrc
+   install -D $SRC/openbox.service $PKG/etc/systemd/system/openbox.service
 
    # Fix libtool files
    fix_la_files $PKG

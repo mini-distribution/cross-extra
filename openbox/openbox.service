@@ -1,0 +1,13 @@
+[Unit]
+Description=Openbox X-server session
+Wants=multi-user.target
+Wants=pango.service
+
+[Service]
+User=root
+Type=idle
+ExecStart=/bin/startx
+ExecStop=/bin/pkill X
+
+[Install]
+WantedBy=multi-user.target
