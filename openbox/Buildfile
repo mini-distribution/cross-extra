@@ -6,7 +6,7 @@ version=3.5.0
 release=1
 source=(http://openbox.org/dist/openbox/openbox-$version.tar.gz
         openbox.service xinitrc)
-depends=(libXrandr libSM glib libxml2 pango)
+depends=(libXrandr libSM glib libxml2 pango which)
 
 build() {
    cd $name-$version
