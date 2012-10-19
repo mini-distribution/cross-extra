@@ -1,0 +1,53 @@
+# Description: A 2D graphics library with support for multiple output devices
+# URL: http://www.cairographics.org/
+
+name=pulseaudio
+version=2.1
+release=1
+source=(http://freedesktop.org/software/pulseaudio/releases/$name-$version.tar.xz)
+depends=(libtool json-c libsndfile dbus avahi systemd)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --sysconfdir=/etc \
+               --disable-x11 \
+               --disable-oss-output \
+               --disable-oss-wrapper \
+               --disable-esound \
+               --disable-solaris \
+               --disable-glib2 \
+               --disable-gtk2 \
+               --disable-gconf \
+               --disable-jack \
+               --disable-asyncns \
+               --disable-lirc \
+               --disable-hal \
+               --disable-bluez \
+               --disable-udev \
+               --disable-hal-compat \
+               --disable-ipv6 \
+               --disable-openssl \
+               --disable-xen \
+               --disable-default-build-tests \
+               --disable-legacy-runtime-dir \
+               --disable-legacy-database-entry-format \
+	       --enable-avahi \
+	       --enable-alsa \
+               --without-fftw \
+               --without-speex \
+               --with-system-user=root \
+               --with-system-group=root \
+               --with-access-group=root
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -rf $PKG/usr/share/locale
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
