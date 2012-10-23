@@ -5,7 +5,7 @@ name=pulseaudio
 version=2.1
 release=1
 source=(http://freedesktop.org/software/pulseaudio/releases/$name-$version.tar.xz)
-depends=(libtool json-c libsndfile dbus avahi systemd)
+depends=(libtool json-c libsndfile avahi systemd)
 
 build() {
    cd $name-$version
@@ -37,6 +37,9 @@ build() {
                --disable-legacy-database-entry-format \
 	       --enable-avahi \
 	       --enable-alsa \
+               --disable-dbus \
+               --enable-systemd \
+               --enable-tcpwrap \
                --without-fftw \
                --without-speex \
                --with-system-user=root \

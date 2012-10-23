@@ -1,7 +1,4 @@
 drwxr-xr-x	root/root	etc/
-drwxr-xr-x	root/root	etc/dbus-1/
-drwxr-xr-x	root/root	etc/dbus-1/system.d/
--rw-r--r--	root/root	etc/dbus-1/system.d/pulseaudio-system.conf
 drwxr-xr-x	root/root	etc/pulse/
 -rw-r--r--	root/root	etc/pulse/client.conf
 -rw-r--r--	root/root	etc/pulse/daemon.conf
@@ -92,8 +89,6 @@ drwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-cli.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-combine-sink.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-combine.so
--rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-console-kit.so
--rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-dbus-protocol.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-default-device-restore.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-detect.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-device-manager.so
@@ -121,7 +116,6 @@ drwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-role-cork.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-rtp-recv.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-rtp-send.so
--rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-rygel-media-server.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-simple-protocol-tcp.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-simple-protocol-unix.so
 -rwxr-xr-x	root/root	usr/lib/pulse-2.1/modules/module-sine.so
