@@ -1,3 +1,13 @@
+drwxr-xr-x	root/root	etc/
+drwxr-xr-x	root/root	etc/dbus-1/
+drwxr-xr-x	root/root	etc/dbus-1/system.d/
+-rw-r--r--	root/root	etc/dbus-1/system.d/avahi-dbus.conf
+-rw-r--r--	root/root	etc/services
+drwxr-xr-x	root/root	etc/systemd/
+drwxr-xr-x	root/root	etc/systemd/system/
+-rw-r--r--	root/root	etc/systemd/system/avahi-daemon.service
+-rw-r--r--	root/root	etc/systemd/system/avahi-daemon.socket
+-rw-r--r--	root/root	etc/systemd/system/avahi-dnsconfd.service
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/avahi-bookmarks
@@ -19,9 +29,6 @@ drwxr-xr-x	root/root	usr/etc/avahi/
 drwxr-xr-x	root/root	usr/etc/avahi/services/
 -rw-r--r--	root/root	usr/etc/avahi/services/sftp-ssh.service
 -rw-r--r--	root/root	usr/etc/avahi/services/ssh.service
-drwxr-xr-x	root/root	usr/etc/dbus-1/
-drwxr-xr-x	root/root	usr/etc/dbus-1/system.d/
--rw-r--r--	root/root	usr/etc/dbus-1/system.d/avahi-dbus.conf
 drwxr-xr-x	root/root	usr/include/
 drwxr-xr-x	root/root	usr/include/avahi-client/
 -rw-r--r--	root/root	usr/include/avahi-client/client.h
@@ -121,6 +128,7 @@ drwxr-xr-x	root/root	usr/share/dbus-1/interfaces/
 -rw-r--r--	root/root	usr/share/dbus-1/interfaces/org.freedesktop.Avahi.ServiceResolver.xml
 -rw-r--r--	root/root	usr/share/dbus-1/interfaces/org.freedesktop.Avahi.ServiceTypeBrowser.xml
 drwxr-xr-x	root/root	usr/share/dbus-1/system-services/
+-rw-r--r--	root/root	usr/share/dbus-1/system-services/org.freedesktop.Avahi.service
 drwxr-xr-x	root/root	usr/share/man/
 drwxr-xr-x	root/root	usr/share/man/man1/
 -rw-r--r--	root/root	usr/share/man/man1/avahi-bookmarks.1
