@@ -1,0 +1,32 @@
+# Description: Gstreamer ZRTP plugin.
+# URL: https://github.com/wernerd/gstzrtp
+
+name=gstzrtp
+version=git-master
+release=1
+depends=(gstreamer-0.10 gst-plugins-base-0.10 gst-plugins-good-0.10 openssl)
+
+build() {
+   git clone git://github.com/wernerd/gstzrtp.git
+   cd gstzrtp
+   chmod +x getzrtp.sh
+   ./getzrtp.sh
+   cd src
+   cmake .. \
+         -DCMAKE_INSTALL_PREFIX=/usr \
+         -DCMAKE_SYSTEM_NAME=Linux \
+         -DCMAKE_C_COMPILER=$HOST-gcc \
+         -DCMAKE_CXX_COMPILER=$HOST-g++ \
+         -DCMAKE_LINKER=$NATIVE_SYSROOT/bin/$HOST-ld \
+         -DCMAKE_AR=$NATIVE_SYSROOT/bin/$HOST-ar \
+         -DCMAKE_NM=$NATIVE_SYSROOT/bin/$HOST-nm \
+         -DCMAKE_OBJDUMP=$NATIVE_SYSROOT/bin/$HOST-objdump \
+         -DCMAKE_RANLIB=$NATIVE_SYSROOT/bin/$HOST-ranlib \
+         -DCMAKE_STRIP=$NATIVE_SYSROOT/bin/$HOST-strip
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   mkdir -p $PKG/usr/lib/gstreamer-0.10
+   mv $PKG/usr/lib/lib* $PKG/usr/lib/gstreamer-0.10
+}
