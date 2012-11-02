@@ -1,0 +1,14 @@
+diff -Naur a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt	2012-11-02 14:07:12.983410914 +0100
++++ b/src/CMakeLists.txt	2012-11-02 14:21:40.151372253 +0100
+@@ -22,8 +22,8 @@
+     ${zrtpSrcs}/zrtp/ZrtpTextData.cpp
+     ${zrtpSrcs}/zrtp/ZrtpConfigure.cpp
+     ${zrtpSrcs}/zrtp/ZrtpCWrapper.cpp
+-    ${zrtpSrcs}/zrtp/Base32.cpp)
+-#    ${zrtpSrcs}/common/osSpecifics.c)
++    ${zrtpSrcs}/zrtp/Base32.cpp
++    ${zrtpSrcs}/common/osSpecifics.c)
+ 
+ 
+ if (OPENSSL_FOUND)

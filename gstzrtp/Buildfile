@@ -4,14 +4,17 @@
 name=gstzrtp
 version=git-master
 release=1
+source=(gstzrtp-zrtpNtohs-fix.patch)
 depends=(gstreamer-0.10 gst-plugins-base-0.10 gst-plugins-good-0.10 openssl)
 
 build() {
    git clone git://github.com/wernerd/gstzrtp.git
    cd gstzrtp
+   patch -p1 < $SRC/gstzrtp-zrtpNtohs-fix.patch
    chmod +x getzrtp.sh
    ./getzrtp.sh
-   cd src
+   mkdir build
+   cd build
    cmake .. \
          -DCMAKE_INSTALL_PREFIX=/usr \
          -DCMAKE_SYSTEM_NAME=Linux \
@@ -22,9 +25,10 @@ build() {
          -DCMAKE_NM=$NATIVE_SYSROOT/bin/$HOST-nm \
          -DCMAKE_OBJDUMP=$NATIVE_SYSROOT/bin/$HOST-objdump \
          -DCMAKE_RANLIB=$NATIVE_SYSROOT/bin/$HOST-ranlib \
-         -DCMAKE_STRIP=$NATIVE_SYSROOT/bin/$HOST-strip
+         -DCMAKE_STRIP=$NATIVE_SYSROOT/bin/$HOST-strip \
+         -DCMAKE_SHARED_LINKER_FLAGS="-Wl,--no-undefined"
 
-   make -j $JOBS
+   make
    make DESTDIR=$PKG install
 
    mkdir -p $PKG/usr/lib/gstreamer-0.10
