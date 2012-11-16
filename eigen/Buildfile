@@ -1,0 +1,14 @@
+# Description: C++ template library for linear algebra
+# URL:         http://eigen.tuxfamily.org
+
+name=eigen
+version=3.1.2
+release=1
+source=(http://bitbucket.org/$name/$name/get/$version.tar.bz2)
+
+build () {
+   cd $name-$name-5097c01bcdc4
+
+   mkdir -p $PKG/usr/include
+   cp -r Eigen $PKG/usr/include/
+}
