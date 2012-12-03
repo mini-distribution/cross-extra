@@ -3,10 +3,10 @@ drwxr-xr-x	root/root	usr/include/
 -rw-r--r--	root/root	usr/include/talloc.h
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libtalloc-compat1-2.0.7.so
-lrwxrwxrwx	root/root	usr/lib/libtalloc.so
-lrwxrwxrwx	root/root	usr/lib/libtalloc.so.1
-lrwxrwxrwx	root/root	usr/lib/libtalloc.so.2
+lrwxrwxrwx	root/root	usr/lib/libtalloc.so.1 -> libtalloc-compat1-2.0.7.so
 -rw-r--r--	root/root	usr/lib/libtalloc.so.2.0.7
+lrwxrwxrwx	root/root	usr/lib/libtalloc.so.2 -> libtalloc.so.2.0.7
+lrwxrwxrwx	root/root	usr/lib/libtalloc.so -> libtalloc.so.2.0.7
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/talloc.pc
 drwxr-xr-x	root/root	usr/share/
