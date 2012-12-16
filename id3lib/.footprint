@@ -21,7 +21,7 @@ drwxr-xr-x	root/root	usr/include/id3/
 -rw-r--r--	root/root	usr/include/id3/writer.h
 -rw-r--r--	root/root	usr/include/id3/writers.h
 drwxr-xr-x	root/root	usr/lib/
-lrwxrwxrwx	root/root	usr/lib/libid3-3.8.so.3
 -rwxr-xr-x	root/root	usr/lib/libid3-3.8.so.3.0.0
+lrwxrwxrwx	root/root	usr/lib/libid3-3.8.so.3 -> libid3-3.8.so.3.0.0
 -rwxr-xr-x	root/root	usr/lib/libid3.la
-lrwxrwxrwx	root/root	usr/lib/libid3.so
+lrwxrwxrwx	root/root	usr/lib/libid3.so -> libid3-3.8.so.3.0.0
