@@ -3,7 +3,7 @@
 # Depends on:  tcp_wrappers ncurses zlib openssl cmake libaio
 
 name=mysql
-version=5.5.28
+version=5.5.29
 release=1
 source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/$name-$version.tar.gz \
         mysql_va_list.patch mysqld.service mysqld_install.service install_mysql)
@@ -50,7 +50,7 @@ build () {
          -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
          -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
          -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-         -DINSTALL_LAYOUT=RPM 
+         -DINSTALL_LAYOUT=RPM
 
    cp ../comp_err extra/
    cp ../comp_sql scripts/
@@ -67,9 +67,9 @@ build () {
    rm $PKG/usr/share/mysql/charsets/README
 
    install -d $PKG/var/lib/mysql
-   install -D $SRC/mysqld.service $PKG/etc/systemd/system/mysqld.service
-   install -D $SRC/mysqld_install.service $PKG/etc/systemd/system/mysqld_install.service
-   install -D -m 500 $SRC/install_mysql $PKG/usr/bin/install_mysql
+   install -Dm 600 $SRC/mysqld.service $PKG/etc/systemd/system/mysqld.service
+   install -Dm 600 $SRC/mysqld_install.service $PKG/etc/systemd/system/mysqld_install.service
+   install -Dm 500 $SRC/install_mysql $PKG/usr/bin/install_mysql
 #   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
 
 #   install -d  $PKG/var/{lib,log}
