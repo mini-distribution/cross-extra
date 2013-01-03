@@ -2,7 +2,7 @@
 # URL: http://talloc.samba.org/
 
 name=talloc
-version=2.0.7
+version=2.0.8
 release=1
 source=(ftp://ftp.samba.org/pub/$name/$name-$version.tar.gz
         talloc.3 cross-32bit.answers)

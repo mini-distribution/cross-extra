@@ -37,3 +37,10 @@ Checking correct behavior of strptime: OK
 Checking for HAVE_IFACE_GETIFADDRS: OK
 Checking for HAVE_IFACE_IFCONF: OK
 Checking for HAVE_IFACE_IFREQ: OK
+Checking getconf LFS_CFLAGS: OK
+Checking for large file support without additional flags: OK
+Checking for working strptime: OK
+Checking for HAVE_SHARED_MMAP: OK
+Checking for HAVE_MREMAP: OK
+Checking for HAVE_INCOHERENT_MMAP: OK
+Checking getconf large file support flags work: OK
