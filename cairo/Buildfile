@@ -2,7 +2,7 @@
 # URL: http://www.cairographics.org/
 
 name=cairo
-version=1.12.4
+version=1.12.8
 release=1
 source=(http://cairographics.org/releases/$name-$version.tar.xz)
 depends=(fontconfig libpng libXrender pixman glib libXext)
