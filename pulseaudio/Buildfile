@@ -2,7 +2,7 @@
 # URL: http://www.cairographics.org/
 
 name=pulseaudio
-version=2.1
+version=3.0
 release=1
 source=(http://freedesktop.org/software/pulseaudio/releases/$name-$version.tar.xz)
 depends=(libtool json-c libsndfile avahi systemd)
@@ -27,7 +27,7 @@ build() {
                --disable-lirc \
                --disable-hal \
                --disable-bluez \
-               --disable-udev \
+               --enable-udev \
                --disable-hal-compat \
                --disable-ipv6 \
                --disable-openssl \
@@ -35,9 +35,9 @@ build() {
                --disable-default-build-tests \
                --disable-legacy-runtime-dir \
                --disable-legacy-database-entry-format \
-	       --enable-avahi \
-	       --enable-alsa \
-               --disable-dbus \
+	            --enable-avahi \
+	            --enable-alsa \
+               --enable-dbus \
                --enable-systemd \
                --enable-tcpwrap \
                --without-fftw \
