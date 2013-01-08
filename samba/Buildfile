@@ -2,14 +2,14 @@
 # URL:         http://www.samba.org
 
 name=samba
-version=3.6.8
+version=4.0.0
 release=1
 source=(http://www.samba.org/samba/ftp/stable/$name-$version.tar.gz
-        smb.conf
-	smbd.service)
+        smb.conf smbd.service)
 depends=(ncurses openssl readline zlib tdb talloc libcap acl)
 
 build () {
+
    cd $name-$version/source3
 
    export samba_cv_HAVE_GETTIMEOFDAY_TZ=yes
@@ -20,24 +20,28 @@ build () {
    export samba_cv_have_longlong=yes
    export libreplace_cv_HAVE_GETADDRINFO=no
    export ac_cv_file__proc_sys_kernel_core_pattern=yes
+   export samba_cv_big_endian=no
+   export samba_cv_little_endian=yes
+   export samba_cv_SIZEOF_BLKCNT_T_4=yes
+   export libreplace_cv_HAVE_SECURE_MKSTEMP=yes
 
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
                --localstatedir=/var \
-               --with-fhs \
+               --enable-fhs \
                --with-configdir=/etc/samba \
                --with-modulesdir=/usr/lib/samba \
                --with-lockdir=/var/run/samba \
                --with-piddir=/var/run/samba \
-               --with-nmbdsocketdir=/var/run/samba \
+               --with-sockets-dir=/var/run/samba \
                --with-logfilebase=/var/log/samba \
                --disable-swat \
                --with-included-popt \
                --enable-external-{libtdb,libtalloc}
 
     make -j $JOBS
-    make DESTDIR=$PKG install
+    make DESTDIR=$PKG install-everything
 
     # pkg-config files
     install -d $PKG/usr/lib/pkgconfig
@@ -54,10 +58,9 @@ build () {
     install -d -m 1777 $PKG/var/spool/samba
 
     # config-file and init script
-    install -m 600 $SRC/smb.conf $PKG/etc/samba/smb.conf
-    install -D $SRC/smbd.service $PKG/etc/systemd/system/smbd.service
+    install -Dm 600 $SRC/smb.conf $PKG/etc/samba/smb.conf
+    install -Dm 600 $SRC/smbd.service $PKG/etc/systemd/system/smbd.service
 
     # cleanup
-    rm $PKG/usr/share/man/man8/{swat.8,tdb*.8}
     rm -r $PKG/usr/share/locale
 }
