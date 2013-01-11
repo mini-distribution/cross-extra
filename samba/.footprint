@@ -70,6 +70,7 @@ drwxr-xr-x	root/root	usr/lib/samba/vfs/
 -rwxr-xr-x	root/root	usr/lib/samba/vfs/acl_tdb.so
 -rwxr-xr-x	root/root	usr/lib/samba/vfs/acl_xattr.so
 -rwxr-xr-x	root/root	usr/lib/samba/vfs/aio_fork.so
+-rwxr-xr-x	root/root	usr/lib/samba/vfs/aio_linux.so
 -rwxr-xr-x	root/root	usr/lib/samba/vfs/aio_posix.so
 -rwxr-xr-x	root/root	usr/lib/samba/vfs/aio_pthread.so
 -rwxr-xr-x	root/root	usr/lib/samba/vfs/audit.so
