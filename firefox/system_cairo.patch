@@ -1,36 +1,20 @@
-diff --git a/gfx/thebes/gfxPlatform.cpp b/gfx/thebes/gfxPlatform.cpp
---- a/gfx/thebes/gfxPlatform.cpp
-+++ b/gfx/thebes/gfxPlatform.cpp
-@@ -491,21 +491,19 @@ gfxPlatform::CreateDrawTargetForSurface(
- 
- cairo_user_data_key_t kSourceSurface;
- 
- void SourceBufferDestroy(void *srcBuffer)
- {
-   static_cast<SourceSurface*>(srcBuffer)->Release();
+diff -Nurp a/gfx/thebes/gfxPlatform.cpp b/gfx/thebes/gfxPlatform.cpp
+--- a/gfx/thebes/gfxPlatform.cpp	2013-01-16 17:01:09.000000000 +0100
++++ b/gfx/thebes/gfxPlatform.cpp	2013-01-19 14:27:48.709562573 +0100
+@@ -507,10 +507,10 @@ void SourceBufferDestroy(void *srcSurfUD
+   delete static_cast<SourceSurfaceUserData*>(srcSurfUD);
  }
  
 -void SourceSnapshotDetached(cairo_surface_t *nullSurf)
 +void SourceSnapshotDetached(void *nullSurf)
  {
--  gfxImageSurface* origSurf =
+   gfxImageSurface* origSurf =
 -    static_cast<gfxImageSurface*>(cairo_surface_get_user_data(nullSurf, &kSourceSurface));
--
-+  gfxImageSurface *origSurf = static_cast<gfxImageSurface*>(nullSurf);
++    static_cast<gfxImageSurface*>(nullSurf);
+ 
    origSurf->SetData(&kSourceSurface, NULL, NULL);
  }
- 
- RefPtr<SourceSurface>
- gfxPlatform::GetSourceSurfaceForSurface(DrawTarget *aTarget, gfxASurface *aSurface)
- {
-   void *userData = aSurface->GetData(&kSourceSurface);
- 
-@@ -592,24 +590,19 @@ gfxPlatform::GetSourceSurfaceForSurface(
-       }
- 
-       srcBuffer = Factory::CreateWrappingDataSourceSurface(imgSurface->Data(),
-                                                            imgSurface->Stride(),
-                                                            size, format);
+@@ -626,14 +626,9 @@ gfxPlatform::GetSourceSurfaceForSurface(
  
      }
  
@@ -47,8 +31,4 @@ diff --git a/gfx/thebes/gfxPlatform.cpp b/gfx/thebes/gfxPlatform.cpp
 +                                SourceSnapshotDetached, imgSurface.get());
    }
  
-   srcBuffer->AddRef();
-   aSurface->SetData(&kSourceSurface, srcBuffer, SourceBufferDestroy);
- 
-   return srcBuffer;
- }
+   SourceSurfaceUserData *srcSurfUD = new SourceSurfaceUserData;

@@ -2,11 +2,11 @@
 # URL: http://www.mozilla.org
 
 name=firefox
-version=17.0.1
+version=18.0.1
 release=1
 source=(http://releases.mozilla.org/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
         firefox.mozconfig system_cairo.patch)
-depends=(gtk2 cairo dbus dbus-glib libpng libjpeg libffi zlib libX11 libXt MesaLib alsa-lib)
+depends=(gtk2 cairo dbus dbus-glib libpng libffi zlib libX11 libXt MesaLib alsa-lib)
 
 build () {
    cd mozilla-release
