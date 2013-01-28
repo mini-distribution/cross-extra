@@ -1,0 +1,33 @@
+# Description: Library of PNG support functions
+# URL: http://www.libpng.org
+
+name=plymouth
+version=0.8.8
+release=1
+source=(http://www.freedesktop.org/software/plymouth/releases/$name-$version.tar.bz2)
+depends=(libpng libdrm)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --exec-prefix=/usr \
+               --sysconfdir=/etc \
+               --localstatedir=/var \
+               --enable-systemd-integration \
+               --disable-upstart-monitoring \
+               --disable-tests \
+               --disable-gtk \
+               --disable-pango \
+               --without-rhgb-compat-link \
+               --without-system-root-install
+
+   make -j $JOBS
+   make DESTDIR=$PKG \
+        SYSTEMD_UNIT_DIR=/usr/lib/systemd/system install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
