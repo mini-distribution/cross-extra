@@ -1,0 +1,19 @@
+# Description: OCF-Linux is a Linux port of the OpenBSD/FreeBSD Cryptographic Framework (OCF).
+# URL: http://ocf-linux.sourceforge.net/
+
+name=ocf-linux
+version=20120127
+release=1
+source=(http://heanet.dl.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
+
+build()
+{
+   install -Dm644 $SRC/$name-$version/ocf/cryptodev.h $PKG/usr/include/crypto/cryptodev.h
+
+   cd $name-$version/crypto-tools
+
+   make CC="$HOST-gcc" CPPFLAGS="-I$PKG/usr/include" cryptotest
+
+   install -D cryptotest $PKG/usr/bin/cryptotest
+
+}
