@@ -1,0 +1,20 @@
+# Description: Daemon to use a Hardware TRNG.
+# URL: http://sourceforge.net/projects/gkernel/files/rng-tools/
+
+name=rng-tools
+version=4
+release=1
+source=(http://heanet.dl.sourceforge.net/project/gkernel/$name/$version/$name-$version.tar.gz)
+
+build()
+{
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j$JOBS
+
+   make DESTDIR=$PKG install
+}
