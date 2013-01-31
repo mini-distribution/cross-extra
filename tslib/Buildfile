@@ -3,22 +3,25 @@
 
 name=tslib
 version=1.0
-release=2
+release=1
 source=(http://download.berlios.de/$name/$name-$version.tar.bz2)
 
 build () {
-  cd $name-$version
+   cd $name-$version
   
-  ./autogen.sh
-  sed 's|LIBFLAGS="|LIBFLAGS="-DUSE_INPUT_API |' -i configure
+   ./autogen.sh
+   sed 's|LIBFLAGS="|LIBFLAGS="-DUSE_INPUT_API |' -i configure
 
-  ./configure --build=$BUILD \
-              --host=$HOST \
-              --prefix=/usr \
-              --sysconfdir=/etc
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --sysconfdir=/etc
 
-  sed '/^#define malloc rpl_malloc/d' -i config.h
+   sed '/^#define malloc rpl_malloc/d' -i config.h
 
-  make
-  make DESTDIR=$PKG install
+   make
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
 }
