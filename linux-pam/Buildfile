@@ -1,0 +1,41 @@
+# Description:	Linux-PAM (Pluggable Authentication Modules for Linux)
+# URL: http://www.us.kernel.org/pub/linux/libs/pam/
+
+name=linux-pam
+version=1.1.6
+release=1
+source=(http://www.linux-pam.org/library/Linux-PAM-$version.tar.bz2
+        pam.conf)
+
+build() {
+   cd Linux-PAM-$version
+
+   # Disable pam_userdb because it relies on the dbm api of db.
+   # If you need this module, rebuild db with --enable-dbm
+   # and comment this:
+   sed -ri -e 's|^(.*)pam_userdb(.*)$|\1\2|g' modules/Makefile.in
+
+   sed -i "/SUBDIRS/s/\bpam_conv1\b//g" conf/Makefile.am
+   sed -i "/SUBDIRS/s/\bspecs\b//g" doc/Makefile.am
+   autoreconf --install
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --exec-prefix=/usr \
+               --libdir=/usr/lib \
+               --sbindir=/usr/sbin \
+               --sysconfdir=/etc \
+               --disable-nis \
+               --disable-nls \
+               --disable-selinux
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -rf $PKG/usr/share/doc
+   install -D -m 644 $SRC/pam.conf $PKG/etc/pam.conf
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
