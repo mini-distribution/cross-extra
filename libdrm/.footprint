@@ -10,6 +10,7 @@ drwxr-xr-x	root/root	usr/include/libdrm/
 -rw-r--r--	root/root	usr/include/libdrm/mga_drm.h
 -rw-r--r--	root/root	usr/include/libdrm/nouveau_drm.h
 -rw-r--r--	root/root	usr/include/libdrm/nouveau.h
+-rw-r--r--	root/root	usr/include/libdrm/omap_drmif.h
 -rw-r--r--	root/root	usr/include/libdrm/r128_drm.h
 -rw-r--r--	root/root	usr/include/libdrm/r600_pci_ids.h
 -rw-r--r--	root/root	usr/include/libdrm/radeon_bo_gem.h
@@ -26,6 +27,8 @@ drwxr-xr-x	root/root	usr/include/libdrm/
 -rw-r--r--	root/root	usr/include/libdrm/vmwgfx_drm.h
 drwxr-xr-x	root/root	usr/include/libkms/
 -rw-r--r--	root/root	usr/include/libkms/libkms.h
+drwxr-xr-x	root/root	usr/include/omap/
+-rw-r--r--	root/root	usr/include/omap/omap_drm.h
 -rw-r--r--	root/root	usr/include/xf86drm.h
 -rw-r--r--	root/root	usr/include/xf86drmMode.h
 drwxr-xr-x	root/root	usr/lib/
@@ -34,6 +37,10 @@ drwxr-xr-x	root/root	usr/lib/
 -rwxr-xr-x	root/root	usr/lib/libdrm_nouveau.so.2.0.0
 lrwxrwxrwx	root/root	usr/lib/libdrm_nouveau.so.2 -> libdrm_nouveau.so.2.0.0
 lrwxrwxrwx	root/root	usr/lib/libdrm_nouveau.so -> libdrm_nouveau.so.2.0.0
+-rwxr-xr-x	root/root	usr/lib/libdrm_omap.la
+-rwxr-xr-x	root/root	usr/lib/libdrm_omap.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/libdrm_omap.so.1 -> libdrm_omap.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/libdrm_omap.so -> libdrm_omap.so.1.0.0
 -rwxr-xr-x	root/root	usr/lib/libdrm_radeon.la
 -rwxr-xr-x	root/root	usr/lib/libdrm_radeon.so.1.0.1
 lrwxrwxrwx	root/root	usr/lib/libdrm_radeon.so.1 -> libdrm_radeon.so.1.0.1
@@ -47,6 +54,7 @@ lrwxrwxrwx	root/root	usr/lib/libkms.so.1 -> libkms.so.1.0.0
 lrwxrwxrwx	root/root	usr/lib/libkms.so -> libkms.so.1.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/libdrm_nouveau.pc
+-rw-r--r--	root/root	usr/lib/pkgconfig/libdrm_omap.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libdrm.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libdrm_radeon.pc
 -rw-r--r--	root/root	usr/lib/pkgconfig/libkms.pc
