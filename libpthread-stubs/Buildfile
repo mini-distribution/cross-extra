@@ -1,4 +1,4 @@
-# Description: Pthread stubs library
+# Description: Pthread dummy library
 # URL: http://xcb.freedesktop.org/dist
 
 name=libpthread-stubs
