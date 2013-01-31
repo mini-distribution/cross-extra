@@ -2,25 +2,24 @@
 # URL: http://tslib.berlios.de/
 
 name=tslib
-version=1.0
+version=git5ab6af2e50
 release=1
-source=(http://download.berlios.de/$name/$name-$version.tar.bz2)
+source=(http://buildgear.org/mirror/$name-$version.tar.gz)
 
 build () {
    cd $name-$version
   
    ./autogen.sh
-   sed 's|LIBFLAGS="|LIBFLAGS="-DUSE_INPUT_API |' -i configure
-
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
                --sysconfdir=/etc
 
-   sed '/^#define malloc rpl_malloc/d' -i config.h
-
-   make
+   make -j $JOBS
    make DESTDIR=$PKG install
+
+   install -d $PKG/etc/profile.d
+   echo "export TSLIB_CONFFILE=/etc/ts.conf" >> $PKG/etc/profile.d/tslib
 
    # Fix libtool files
    fix_la_files $PKG

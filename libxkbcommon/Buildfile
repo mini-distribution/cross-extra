@@ -1,0 +1,21 @@
+# Description: library to handle keyboard descriptions
+# URL: http://xkbcommon.org
+
+name=libxkbcommon
+version=0.2.0
+release=1
+source=(http://xkbcommon.org/download/$name-$version.tar.bz2)
+
+build () {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
