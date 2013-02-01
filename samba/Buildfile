@@ -2,7 +2,7 @@
 # URL:         http://www.samba.org
 
 name=samba
-version=4.0.0
+version=4.0.2
 release=1
 source=(http://www.samba.org/samba/ftp/stable/$name-$version.tar.gz
         smb.conf smbd.service)
