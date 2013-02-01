@@ -2,7 +2,7 @@
 # URL: http://dickey.his.com/xterm/xterm.html
 
 name=xterm
-version=283
+version=288
 release=1
 source=(ftp://invisible-island.net/$name/$name-$version.tgz)
 depends=(libXaw ncurses)
@@ -16,7 +16,8 @@ build() {
               --prefix=/usr \
               --disable-nls \
               --enable-256-color \
-              --enable-wide-chars
+              --enable-wide-chars \
+              LDFLAGS="-ltinfo"
 
   make -j $JOBS
   make install DESTDIR=$PKG
