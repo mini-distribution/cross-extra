@@ -2,7 +2,7 @@
 # URL:         http://www.gnu.org/software/gettext/
 
 name=gettext
-version=0.18.1.1
+version=0.18.2
 release=1
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 depends=(ncurses acl)
@@ -23,7 +23,6 @@ build() {
    make -j $JOBS
    make -j1 DESTDIR=$PKG install
    rm -r $PKG/usr/share/{info,doc}
-   rm $PKG/usr/share/gettext/intl/{COPYING*,ChangeLog}
 
    # Fix libtool files
    fix_la_files $PKG
