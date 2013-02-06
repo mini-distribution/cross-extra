@@ -1,9 +1,0 @@
-drwxr-xr-x	root/root	usr/
-drwxr-xr-x	root/root	usr/sbin/
--rwxr-xr-x	root/root	usr/sbin/fbset
-drwxr-xr-x	root/root	usr/share/
-drwxr-xr-x	root/root	usr/share/man/
-drwxr-xr-x	root/root	usr/share/man/man5/
--rwxr-xr-x	root/root	usr/share/man/man5/fb.modes.5
-drwxr-xr-x	root/root	usr/share/man/man8/
--rwxr-xr-x	root/root	usr/share/man/man8/fbset.8
