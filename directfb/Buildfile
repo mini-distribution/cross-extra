@@ -10,11 +10,14 @@ depends=(zlib libpng libjpeg freetype)
 build() {
    cd DirectFB-$version
 
-   ./configure --prefix=/usr --host=$HOST --enable-zlib \
-               --with-gfxdrivers=omap
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-zlib \
+               --enable-png \
+               --with-gfxdrivers=none
 
    make -j$JOBS
-
    make DESTDIR=$PKG install
 
    # Fix libtool files
