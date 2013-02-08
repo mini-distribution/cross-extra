@@ -1,0 +1,22 @@
+# Description: Library that provides hardware graphics acceleration
+# URL:         http://www.directfb.org/
+
+name=directfb
+version=1.6.3
+release=1
+source=(http://directfb.org/downloads/Core/DirectFB-1.6/DirectFB-$version.tar.gz)
+depends=(zlib libpng libjpeg freetype)
+
+build() {
+   cd DirectFB-$version
+
+   ./configure --prefix=/usr --host=$HOST --enable-zlib \
+               --with-gfxdrivers=omap
+
+   make -j$JOBS
+
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
