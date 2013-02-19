@@ -27,10 +27,10 @@ build() {
 }
 
 check() {
-   check_tool makedepend
+   check_tool makedepend "Available in Ubuntu package xutils-dev"
    check_tool python2
    check_tool autoreconf
    check_tool automake
    check_tool aclocal
-   check_exist /usr/share/pyshared/libxml2.py
+   check_exist /usr/share/pyshared/libxml2.py "Available in Ubuntu package python-libxml2"
 }

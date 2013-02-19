@@ -1,0 +1,16 @@
+# Description: A few applications for viewing and editing images.
+# URL:         https://www.kraxel.org/blog/linux/fbida/
+
+name=fbida
+version=2.09
+release=1
+source=(http://www.kraxel.org/releases/$name/$name-$version.tar.gz)
+depends=(libjpeg libpng libtiff libexif freetype fontconfig)
+
+build() {
+   cd $name-$version
+
+   make CC=$HOST-gcc
+
+   make STRIP="" DESTDIR=$PKG install prefix=/usr
+}

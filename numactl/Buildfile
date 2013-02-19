@@ -1,0 +1,16 @@
+# Description: NUMA stands for Non-Uniform Memory Access, in other words a system whose memory is not all in one place.
+# URL: http://oss.sgi.com/projects/libnuma/
+
+name=numactl
+version=2.0.8
+release=1
+source=(ftp://oss.sgi.com/www/projects/libnuma/download/$name-$version.tar.gz)
+depends=
+
+build() {
+   cd $name-$version
+   make CC=$HOST-gcc
+   make prefix=$PKG/usr libdir=$PKG/usr/lib install
+
+}
+

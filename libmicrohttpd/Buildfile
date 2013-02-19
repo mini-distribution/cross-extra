@@ -2,9 +2,9 @@
 # URL: http://www.gnu.org/software/libmicrohttpd/
 
 name=libmicrohttpd
-version=0.9.22
+version=0.9.25
 release=1
-source=(http://ftp.club.cc.cmu.edu/pub/gnu/$name/$name-$version.tar.gz)
+source=(http://ftpmirror.gnu.org/$name/$name-$version.tar.gz)
 
 build() {
    cd $name-$version

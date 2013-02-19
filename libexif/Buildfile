@@ -1,0 +1,21 @@
+# Description: Ogg bitstream and framing library
+# URL: http://www.xiph.org/ogg/
+
+name=libexif
+version=0.6.21
+release=1
+source=(http://heanet.dl.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
