@@ -1,11 +1,7 @@
-Bug: http://bugs.mysql.com/bug.php?id=62769
-Bug-Ubuntu: http://pad.lv/700982
-Description: make sure va_list usage is portable to fix FTBFS on ARM
-
-diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/client_plugin.c
---- mysql-5.5.16.orig/sql-common/client_plugin.c	2011-09-09 11:56:39.000000000 -0400
-+++ mysql-5.5.16/sql-common/client_plugin.c	2011-10-16 23:00:00.708799138 -0400
-@@ -233,11 +233,13 @@
+diff -Nurp a/sql-common/client_plugin.c b/sql-common/client_plugin.c
+--- a/sql-common/client_plugin.c	2013-02-28 18:32:49.243686342 +0100
++++ b/sql-common/client_plugin.c	2013-02-28 18:37:31.968224310 +0100
+@@ -233,11 +233,12 @@ int mysql_client_plugin_init()
  {
    MYSQL mysql;
    struct st_mysql_client_plugin **builtin;
@@ -14,21 +10,22 @@ diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/
    if (initialized)
      return 0;
  
-   bzero(&mysql, sizeof(mysql)); /* dummy mysql for set_mysql_extended_error */
-+  bzero(&unused, sizeof(unused)); /* suppress uninitialized-value warnings */
+-  memset(&mysql, 0, sizeof(mysql)); /* dummy mysql for set_mysql_extended_error */
++  memset(&unused, 0, sizeof(unused)); /* suppress uninitialized-value warnings */
  
-   pthread_mutex_init(&LOCK_load_client_plugin, MY_MUTEX_INIT_SLOW);
+   mysql_mutex_init(0, &LOCK_load_client_plugin, MY_MUTEX_INIT_SLOW);
    init_alloc_root(&mem_root, 128, 128);
-@@ -249,7 +251,7 @@
-   pthread_mutex_lock(&LOCK_load_client_plugin);
+@@ -249,7 +250,8 @@ int mysql_client_plugin_init()
+   mysql_mutex_lock(&LOCK_load_client_plugin);
  
    for (builtin= mysql_client_builtins; *builtin; builtin++)
 -    add_plugin(&mysql, *builtin, 0, 0, 0);
 +    add_plugin(&mysql, *builtin, 0, 0, unused);
++
  
-   pthread_mutex_unlock(&LOCK_load_client_plugin);
+   mysql_mutex_unlock(&LOCK_load_client_plugin);
  
-@@ -293,9 +295,13 @@
+@@ -293,9 +295,13 @@ struct st_mysql_client_plugin *
  mysql_client_register_plugin(MYSQL *mysql,
                               struct st_mysql_client_plugin *plugin)
  {
@@ -37,17 +34,17 @@ diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/
    if (is_not_initialized(mysql, plugin->name))
      return NULL;
  
-+  bzero(&unused, sizeof(unused)); /* suppress uninitialized-value warnings */
++  memset(&unused, 0, sizeof(unused)); /* suppress uninitialized-value warnings */
 +
-   pthread_mutex_lock(&LOCK_load_client_plugin);
+   mysql_mutex_lock(&LOCK_load_client_plugin);
  
    /* make sure the plugin wasn't loaded meanwhile */
-@@ -307,7 +313,7 @@
+@@ -307,7 +313,7 @@ mysql_client_register_plugin(MYSQL *mysq
      plugin= NULL;
    }
    else
 -    plugin= add_plugin(mysql, plugin, 0, 0, 0);
 +    plugin= add_plugin(mysql, plugin, 0, 0, unused);
  
-   pthread_mutex_unlock(&LOCK_load_client_plugin);
+   mysql_mutex_unlock(&LOCK_load_client_plugin);
    return plugin;

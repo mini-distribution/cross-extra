@@ -3,22 +3,28 @@
 # Depends on:  tcp_wrappers ncurses zlib openssl cmake libaio
 
 name=mysql
-version=5.5.30
+version=5.6.10
 release=1
-source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.5/$name-$version.tar.gz \
-        mysql_va_list.patch mysqld.service mysqld_install.service install_mysql)
+source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.6/$name-$version.tar.gz \
+        mysql_va_list.patch mysqld.service mysqld_install.service install_mysql
+        mysql-bug.67018.patch mysql-perfschema-zlib.patch)
 depends=(openssl zlib libaio ncurses tcp_wrappers)
 
 build () {
    cd $name-$version
 
    patch -p1 < $SRC/mysql_va_list.patch
+   patch -p1 < $SRC/mysql-bug.67018.patch
+   patch -p1 < $SRC/mysql-perfschema-zlib.patch
 
-   cmake .
-   make -j $JOBS
+   cmake -DWITH_ZLIB=system .
+
+   make comp_err comp_sql gen_lex_hash gen_pfs_lex_token -j$JOBS
+
    cp extra/comp_err $SRC
    cp scripts/comp_sql $SRC
    cp sql/gen_lex_hash $SRC
+   cp storage/perfschema/gen_pfs_lex_token $SRC
    rm CMakeCache.txt
    make clean
 
@@ -34,6 +40,7 @@ build () {
          -DCMAKE_OBJDUMP=$NATIVE_SYSROOT/bin/$HOST-objdump \
          -DCMAKE_RANLIB=$NATIVE_SYSROOT/bin/$HOST-ranlib \
          -DCMAKE_STRIP=$NATIVE_SYSROOT/bin/$HOST-strip \
+         -DCMAKE_CROSSCOMPILING=TRUE \
          -DSTACK_DIRECTION=1 \
          -DSYSCONFDIR=/etc \
          -DINSTALL_LIBDIR=lib \
@@ -50,11 +57,14 @@ build () {
          -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
          -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
          -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-         -DINSTALL_LAYOUT=RPM
+         -DINSTALL_LAYOUT=RPM \
+         -DCMAKE_C_FLAGS="-Wno-psabi" \
+         -DCMAKE_CXX_FLAGS="-Wno-psabi"
 
    cp ../comp_err extra/
    cp ../comp_sql scripts/
    cp ../gen_lex_hash sql/
+   cp ../gen_pfs_lex_token storage/perfschema/
 
 #        -DWITH_SSL=system
 #        -DBUILD_CONFIG=mysql_release \
