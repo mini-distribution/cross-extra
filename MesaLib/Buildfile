@@ -2,22 +2,25 @@
 # URL: http://www.mesa3d.org
 
 name=MesaLib
-version=8.0.4
+version=9.1
 release=1
 source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2
-        0001-Don-t-cross-compile-src-glsl-builtin_compiler.patch)
-depends=(libX11 xextproto libXext)
+        fix-builtin-linking.patch)
+depends=(libX11 xextproto libXext glproto libdrm dri2proto
+         libXdamage libXfixes)
 
 build() {
    cd Mesa-$version
 
-   patch -p1 < $SRC/0001-Don-t-cross-compile-src-glsl-builtin_compiler.patch
+   patch -p1 < $SRC/fix-builtin-linking.patch
+
    NOCONFIGURE=1 ./autogen.sh
 
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --with-dri-drivers=swrast
+               --with-dri-drivers=swrast \
+               --with-gallium-drivers=swrast
 
    make -j $JOBS
    make DESTDIR=$PKG install
