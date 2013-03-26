@@ -2,7 +2,7 @@
 # URL: http://www.boost.org/
 
 name=boost
-version=1.52.0
+version=1.53.0
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.tar.bz2)
 depends=(expat icu python zlib)
