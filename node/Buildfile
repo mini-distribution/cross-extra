@@ -1,0 +1,22 @@
+# Description: Platform to create fast, scalable network applications
+# URL: http://nodejs.org
+
+name=node
+version=0.10.1
+release=1
+source=(http://nodejs.org/dist/v0.10.1/$name-v$version.tar.gz)
+
+build() {
+   cd $name-v$version
+
+   CC=$HOST-cc \
+   CXX=$HOST-g++ \
+   LD=$HOST-g++ \
+   LINK=$HOST-g++ \
+   AR=$HOST-ar \
+   ./configure --prefix=/usr \
+               --without-snapshot
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}
