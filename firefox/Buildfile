@@ -2,7 +2,7 @@
 # URL: http://www.mozilla.org
 
 name=firefox
-version=19.0
+version=19.0.2
 release=1
 source=(http://download.cdn.mozilla.net/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
         firefox.mozconfig system_cairo.patch)

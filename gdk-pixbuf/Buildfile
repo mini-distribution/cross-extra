@@ -2,9 +2,9 @@
 # URL: http://www.gtk.org/
 
 name=gdk-pixbuf
-version=2.26.5
+version=2.28.0
 release=1
-source=(http://download.gnome.org/sources/$name/2.26/$name-$version.tar.xz)
+source=(http://download.gnome.org/sources/$name/2.28/$name-$version.tar.xz)
 depends=(glib libX11 libpng libtiff libjpeg)
 
 build () {
