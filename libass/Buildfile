@@ -2,7 +2,7 @@
 # URL: http://code.google.com/p/libass/
 
 name=libass
-version=0.10.0
+version=0.10.1
 release=1
 source=(http://libass.googlecode.com/files/$name-$version.tar.xz)
 depends=(fribidi enca freetype fontconfig)
