@@ -3,11 +3,11 @@
 
 
 name=mesa-demos
-version=8.0.1
+version=8.1.0
 release=1
 source=(ftp://ftp.freedesktop.org/pub/mesa/demos/$version/$name-$version.tar.bz2
         LICENSE)
-depends=(glew)
+depends=(glew glu)
 
 build() {
    cd $SRC/$name-$version
