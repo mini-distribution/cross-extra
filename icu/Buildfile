@@ -2,7 +2,7 @@
 # URL: http://www.icu-project.org/
 
 name=icu
-version=4.8.1.1
+version=51.1
 release=1
 source=(http://download.icu-project.org/files/icu4c/$version/icu4c-${version//./_}-src.tgz)
 
@@ -13,7 +13,7 @@ build() {
         --prefix=/usr \
         --disable-samples  \
         --disable-tests \
-        --enable-rpath 
+        --enable-rpath
 
   make -j $JOBS
 
