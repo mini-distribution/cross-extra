@@ -2,7 +2,7 @@
 # URL: http://www.freedesktop.org/wiki/Software/HarfBuzz
 
 name=harfbuzz
-version=0.9.13
+version=0.9.14
 release=1
 source=(http://www.freedesktop.org/software/$name/release/$name-$version.tar.bz2)
 depends=(freetype glib)
@@ -16,5 +16,7 @@ build () {
 
    make -j $JOBS
    make DESTDIR=$PKG install
+
+   fix_la_files $PKG
 
 }
