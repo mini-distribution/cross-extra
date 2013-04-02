@@ -1,0 +1,26 @@
+# Description: Perl 5 is a highly capable, feature-rich programming language
+# URL: http://www.perl.org/
+
+name=perl
+version=5.16.3
+release=1
+source=(http://www.cpan.org/src/5.0/$name-$version.tar.gz
+        http://download.berlios.de/perlcross/perl-5.16.3-cross-0.7.2.tar.gz/from_sourceforge)
+depends=(db gdbm)
+
+build() {
+   tar -xf from_sourceforge
+   cd $name-$version
+
+   ./configure --prefix=/usr \
+               --mode=buildmini
+
+   ./configure --prefix=/usr \
+               --target=$HOST \
+               --build=$BUILD \
+               --mode=target
+
+   make
+   make DESTDIR=$PKG install
+
+}
