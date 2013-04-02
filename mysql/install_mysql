@@ -1,8 +1,0 @@
-#!/bin/bash
-
-echo "Creating database"
-/bin/mysql_install_db
-echo "Granting privileges for all"
-/bin/mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
-echo "Allow connection from ALL"
-echo "mysqld: ALL" >> /etc/hosts.allow

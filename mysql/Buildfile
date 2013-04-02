@@ -6,9 +6,9 @@ name=mysql
 version=5.6.10
 release=1
 source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.6/$name-$version.tar.gz \
-        mysql_va_list.patch mysqld.service mysqld_install.service install_mysql
+        mysql_va_list.patch mysqld.service
         mysql-bug.67018.patch mysql-perfschema-zlib.patch)
-depends=(openssl zlib libaio ncurses tcp_wrappers)
+depends=(openssl zlib libaio ncurses tcp_wrappers perl)
 
 build () {
    cd $name-$version
@@ -78,8 +78,6 @@ build () {
 
    install -d $PKG/var/lib/mysql
    install -Dm 600 $SRC/mysqld.service $PKG/etc/systemd/system/mysqld.service
-   install -Dm 600 $SRC/mysqld_install.service $PKG/etc/systemd/system/mysqld_install.service
-   install -Dm 500 $SRC/install_mysql $PKG/usr/bin/install_mysql
 #   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
 
 #   install -d  $PKG/var/{lib,log}
