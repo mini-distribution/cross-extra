@@ -1,0 +1,20 @@
+# Description: tmux is a terminal multiplexer
+# URL: http://tmux.sourceforge.net/
+
+name=tmux
+version=1.8
+release=1
+source=(http://surfnet.dl.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz)
+depends=(ncurses libevent)
+
+build() {
+   cd $name-$version
+
+   ./configure --prefix=/usr  \
+               --host=$HOST   \
+               --build=$BUILD \
+               LIBS=-ltinfo
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+}
