@@ -2,7 +2,7 @@
 # URL: http://snowshoe.openbossa.org/
 
 name=snowshoe
-version=gita45bd95
+version=git-f131998
 release=1
 source=(http://buildgear.org/mirror/$name-$version.tar.gz
         snowshoe-fullscreen.patch
