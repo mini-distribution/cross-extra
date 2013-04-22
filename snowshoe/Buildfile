@@ -4,7 +4,7 @@
 name=snowshoe
 version=gita45bd95
 release=1
-source=(sftp://tmdssk3358-team@ixonos01.novipark.dk/source/$name-$version.tar.gz
+source=(http://buildgear.org/mirror/$name-$version.tar.gz
         snowshoe-fullscreen.patch
         snowshoe.service)
 depends=(qtwebkit)
