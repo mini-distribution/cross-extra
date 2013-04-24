@@ -1,0 +1,22 @@
+# Description: Intel driver for libva
+# URL: http://freedesktop.org/wiki/Software/vaapi
+
+name=libva-intel-driver
+version=1.0.20
+release=1
+source=(http://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/$name-$version.tar.bz2)
+depends=(libva)
+
+build() {
+
+   cd $name-$version
+
+   ./configure --prefix=/usr  \
+               --host=$HOST   \
+               --build=$BUILD
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+
+   fix_la_files $PKG
+}
