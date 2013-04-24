@@ -2,10 +2,10 @@
 # URL: http://dri.freedesktop.org/libdrm/
 
 name=libdrm
-version=2.4.42
+version=2.4.44
 release=1
 source=(http://dri.freedesktop.org/libdrm/$name-$version.tar.gz)
-depends=(libpthread-stubs systemd)
+depends=(libpthread-stubs systemd libpciaccess)
 
 build() {
    cd $name-$version
