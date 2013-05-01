@@ -2,7 +2,7 @@
 # URL: http://curl.haxx.se
 
 name=curl
-version=7.29.0
+version=7.30.0
 release=1
 source=(http://curl.haxx.se/download/$name-$version.tar.bz2)
 depends=(openssl zlib)
@@ -14,7 +14,7 @@ build() {
                --host=$HOST \
                --prefix=/usr \
                --mandir=/usr/share
-  
+
    make -j $JOBS
    make DESTDIR=$PKG install
 
