@@ -14,7 +14,8 @@ build() {
                --prefix=/usr \
                --mandir=/usr/share/man \
                --disable-static \
-               --disable-gch
+               --disable-gch \
+               ac_cv_prog_FOUND_HELP2MAN="no"
 
    make -j $JOBS
    make DESTDIR=$PKG install
