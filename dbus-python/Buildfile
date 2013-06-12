@@ -1,0 +1,21 @@
+# Description: Describe the build here
+# URL: http://www.something.com
+
+name=dbus-python
+version=1.2.0
+release=1
+source=(http://dbus.freedesktop.org/releases/$name/$name-$version.tar.gz)
+depends=(python dbus-glib)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               PYTHON_INCLUDES="-I$SYSROOT/usr/include/python2.7" \
+               PYTHON_LIBS_LDFLAGS="-L$SYSROOT/usr/lib -lpython2.7"
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+}
