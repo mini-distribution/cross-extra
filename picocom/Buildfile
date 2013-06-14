@@ -1,0 +1,16 @@
+# Description: As its name suggests, picocom is a minimal dumb-terminal emulation program
+# URL: http://code.google.com/p/picocom/
+
+name=picocom
+version=1.7
+release=1
+source=(http://picocom.googlecode.com/files/picocom-1.7.tar.gz)
+depends=()
+
+build() {
+   cd $name-$version
+
+   make CC=$HOST-gcc LD=$HOST-gcc
+
+   install -D picocom $PKG/usr/bin/picocom
+}
