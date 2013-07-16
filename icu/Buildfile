@@ -2,7 +2,7 @@
 # URL: http://www.icu-project.org/
 
 name=icu
-version=51.1
+version=51.2
 release=1
 source=(http://download.icu-project.org/files/icu4c/$version/icu4c-${version//./_}-src.tgz)
 
