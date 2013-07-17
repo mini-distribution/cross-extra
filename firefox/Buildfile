@@ -2,17 +2,16 @@
 # URL: http://www.mozilla.org
 
 name=firefox
-version=20.0
+version=22.0
 release=1
 source=(http://download.cdn.mozilla.net/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
-        firefox.mozconfig system_cairo.patch realloc_compile_error.patch)
+        firefox.mozconfig system_cairo.patch)
 depends=(gtk2 cairo dbus dbus-glib libpng libffi zlib libX11 libXt MesaLib alsa-lib)
 
 build () {
    cd mozilla-release
 
    patch -p1 < $SRC/system_cairo.patch
-   patch -p1 < $SRC/realloc_compile_error.patch
 
    cp $SRC/firefox.mozconfig .mozconfig
    echo "ac_add_options --prefix=/usr" >> .mozconfig
