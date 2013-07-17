@@ -2,7 +2,7 @@
 # URL: http://freedesktop.org/wiki/Software/vaapi
 
 name=libva-intel-driver
-version=1.0.20
+version=1.2.0
 release=1
 source=(http://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/$name-$version.tar.bz2)
 depends=(libva)
