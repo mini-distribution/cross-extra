@@ -1,23 +1,20 @@
 # Description: SQL database server
 # URL:         http://www.mysql.com
-# Depends on:  tcp_wrappers ncurses zlib openssl cmake libaio
 
 name=mysql
-version=5.6.10
+version=5.6.12
 release=1
 source=(http://mirror.switch.ch/mirror/mysql/Downloads/MySQL-5.6/$name-$version.tar.gz \
         mysql_va_list.patch mysqld.service
         mysql-bug.67018.patch mysql-perfschema-zlib.patch)
-depends=(openssl zlib libaio ncurses tcp_wrappers perl)
+depends=(openssl libaio ncurses tcp_wrappers perl)
 
 build () {
    cd $name-$version
 
    patch -p1 < $SRC/mysql_va_list.patch
-   patch -p1 < $SRC/mysql-bug.67018.patch
-   patch -p1 < $SRC/mysql-perfschema-zlib.patch
 
-   cmake -DWITH_ZLIB=system .
+   cmake -DWITH_ZLIB=bundled .
 
    make comp_err comp_sql gen_lex_hash gen_pfs_lex_token -j$JOBS
 
@@ -50,9 +47,7 @@ build () {
          -DWITH_SSL=system \
          -DCURSES_LIBRARY=$SYSROOT/usr/lib/libncurses.a \
          -DCURSES_INCLUDE_PATH=$SYSROOT/usr/include \
-         -DWITH_ZLIB=system \
-         -DZLIB_LIBRARY=$SYSROOT/usr/lib/libz.a \
-         -DZLIB_INCLUDE_DIR=$SYSROOT/usr/include \
+         -DWITH_ZLIB=bundled \
          -DCMAKE_FIND_ROOT_PATH=$SYSROOT \
          -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
          -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
@@ -66,10 +61,6 @@ build () {
    cp ../gen_lex_hash sql/
    cp ../gen_pfs_lex_token storage/perfschema/
 
-#        -DWITH_SSL=system
-#        -DBUILD_CONFIG=mysql_release \
-#        -DMYSQL_DATADIR=$DEST/data
-
    make -j$JOBS
    make DESTDIR=$PKG install
 
@@ -78,14 +69,6 @@ build () {
 
    install -d $PKG/var/lib/mysql
    install -Dm 600 $SRC/mysqld.service $PKG/etc/systemd/system/mysqld.service
-#   find $PKG/usr/share/mysql/* -type d ! -name english ! -name charsets | xargs rm -r {} \;
-
-#   install -d  $PKG/var/{lib,log}
-#   touch mysqld.log
-#   install -m 600 -o mysql -g mysql mysqld.log $PKG/var/log
-#   install -d -m 700 -o mysql -g mysql $PKG/var/lib/mysql
-#   install -D -m 755 $SRC/mysqld $PKG/etc/rc.d/mysqld
-#   install -m 600 $SRC/my.cnf $PKG/etc
 }
 
 check() {
