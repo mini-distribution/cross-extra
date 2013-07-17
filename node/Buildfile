@@ -2,7 +2,7 @@
 # URL: http://nodejs.org
 
 name=node
-version=0.10.1
+version=0.10.13
 release=1
 source=(http://nodejs.org/dist/v$version/$name-v$version.tar.gz)
 
