@@ -1,0 +1,22 @@
+# Description: Speex is an Open Source/Free Software patent-free audio compression format designed for speech.
+# URL: http://www.speex.org/
+
+name=speex
+version=1.2rc1
+release=1
+source=(http://downloads.xiph.org/releases/$name/$name-$version.tar.gz)
+depends=(libogg)
+
+build() {
+   cd $name-$version
+
+   ./configure --host=$HOST   \
+               --build=$BUILD \
+               --prefix=/usr  \
+               --with-ogg=$SYSROOT/usr
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+
+   fix_la_files $PKG
+}
