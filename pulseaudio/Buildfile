@@ -2,10 +2,10 @@
 # URL: http://www.cairographics.org/
 
 name=pulseaudio
-version=3.0
+version=4.0
 release=1
 source=(http://freedesktop.org/software/pulseaudio/releases/$name-$version.tar.xz)
-depends=(libtool json-c libsndfile avahi systemd)
+depends=(libtool json-c libsndfile avahi systemd speex orc)
 
 build() {
    cd $name-$version
@@ -35,13 +35,12 @@ build() {
                --disable-default-build-tests \
                --disable-legacy-runtime-dir \
                --disable-legacy-database-entry-format \
-	            --enable-avahi \
-	            --enable-alsa \
+	       --enable-avahi \
+	       --enable-alsa \
                --enable-dbus \
                --enable-systemd \
                --enable-tcpwrap \
                --without-fftw \
-               --without-speex \
                --with-system-user=root \
                --with-system-group=root \
                --with-access-group=root
