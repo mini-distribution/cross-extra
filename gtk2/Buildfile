@@ -30,6 +30,6 @@ build () {
 
 check() {
    # Required to build demos, TODO: disable demos compilation
-   check_tool gdk-pixbuf-csource
-   check_tool gtk-update-icon-cache
+   check_tool gdk-pixbuf-csource "Installed with Ubuntu package libgdk-pixbuf2.0-dev"
+   check_tool gtk-update-icon-cache "Installed with Ubuntu package libgtk2.0-bin"
 }
