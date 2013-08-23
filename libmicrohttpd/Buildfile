@@ -2,7 +2,7 @@
 # URL: http://www.gnu.org/software/libmicrohttpd/
 
 name=libmicrohttpd
-version=0.9.27
+version=0.9.28
 release=1
 source=(http://ftpmirror.gnu.org/$name/$name-$version.tar.gz)
 
