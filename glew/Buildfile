@@ -2,7 +2,7 @@
 # URL: http://glew.sourceforge.net/
 
 name=glew
-version=1.9.0
+version=1.10.0
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tgz)
 depends=(MesaLib libXi libXmu)
