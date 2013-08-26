@@ -1,0 +1,39 @@
+# Description: This is the libwebsockets C library for lightweight websocket clients and servers.
+# URL: http://libwebsockets.org/
+
+name=libwebsockets
+version=6c58228577306c023b072b5c7c7a2b044a94f12a
+release=1
+source=(https://github.com/warmcat/libwebsockets/archive/$version.tar.gz)
+depends=(openssl)
+
+build() {
+   cd $name-$version
+
+   mkdir build
+   cd build
+   cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+            -DCMAKE_AR:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-ar \
+            -DCMAKE_CXX_COMPILER=$NATIVE_SYSROOT/bin/$HOST-c++ \
+            -DCMAKE_C_COMPILER:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-cc \
+            -DCMAKE_LINKER:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-ld \
+            -DCMAKE_NM:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-nm \
+            -DCMAKE_OBJCOPY:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-objcopy \
+            -DCMAKE_OBJDUMP:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-objdump \
+            -DCMAKE_RANLIB:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-ranlib \
+            -DCMAKE_SKIP_RPATH:BOOL=YES \
+            -DCMAKE_SKIP_INSTALL_RPATH:BOOL=YES \
+            -DCMAKE_STRIP:FILEPATH=$NATIVE_SYSROOT/bin/$HOST-strip \
+            -DOPENSSL_CRYPTO_LIBRARY:FILEPATH=$SYSROOT/usr/lib/libcrypto.so \
+            -DOPENSSL_INCLUDE_DIR:PATH=$SYSROOT/usr/include \
+            -DOPENSSL_SSL_LIBRARY:FILEPATH=$SYSROOT/usr/lib/libssl.so \
+            -DZLIB_INCLUDE_DIR:PATH=$SYSROOT/usr/include \
+            -DZLIB_LIBRARY:FILEPATH=$SYSROOT/usr/lib/libz.so
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+}
+
+check() {
+   check_tool cmake
+}
