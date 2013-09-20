@@ -4,11 +4,22 @@
 name=fbida
 version=2.09
 release=1
-source=(http://www.kraxel.org/releases/$name/$name-$version.tar.gz)
+source=(http://www.kraxel.org/releases/$name/$name-$version.tar.gz
+        fix-compile-flags.patch
+        http://buildgear.org/mirror/jpegsrc.v09a.tar.gz)
 depends=(libjpeg libpng libtiff libexif freetype fontconfig)
 
 build() {
    cd $name-$version
+
+   mkdir -p jpeg/90
+   cp $SRC/jpeg-9a/{jinclude.h,jpegint.h,jpeglib.h,transupp.c,transupp.h} \
+      jpeg/90
+
+   patch -p2 -i $SRC/fix-compile-flags.patch
+
+   export CFLAGS=-I$SYSROOT/usr/include
+   export LDFLAGS=-L$SYSROOT/usr/include
 
    make CC=$HOST-gcc
 
