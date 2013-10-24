@@ -2,7 +2,7 @@
 # URL: http://www.gtk.org/
 
 name=gtk2
-version=2.24.20
+version=2.24.22
 release=1
 source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz)
 depends=(atk gdk-pixbuf hicolor-icon-theme libtiff pango libSM libXcursor libXrandr libXi)
