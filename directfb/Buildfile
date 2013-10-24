@@ -2,7 +2,7 @@
 # URL:         http://www.directfb.org/
 
 name=directfb
-version=1.7.0
+version=1.7.1
 release=1
 source=(http://directfb.org/downloads/Core/DirectFB-${version%.*}/DirectFB-$version.tar.gz)
 depends=(zlib libpng libjpeg freetype)
