@@ -2,9 +2,9 @@
 # URL: http://mikmod.shlomifish.org/
 
 name=libmikmod
-version=3.2.0
+version=3.3.3
 release=1
-source=(http://mikmod.shlomifish.org/files/$name-$version.tar.gz)
+source=(http://surfnet.dl.sourceforge.net/project/mikmod/$name/$version/$name-$version.tar.gz)
 depends=(alsa-lib)
 
 build(){
@@ -12,7 +12,7 @@ build(){
 
    sed -i docs/Makefile.in \
         -e 's|^INFO_DEPS = .*|INFO_DEPS =|g'
-	
+ 
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
