@@ -2,7 +2,7 @@
 # URL: http://cihar.com/software/enca/
 
 name=enca
-version=1.14
+version=1.15
 release=1
 source=(http://dl.cihar.com/$name/$name-$version.tar.bz2
         enca-1.13-crosscompile.patch)
