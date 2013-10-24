@@ -2,10 +2,10 @@
 # URL: http://www.perl.org/
 
 name=perl
-version=5.16.3
+version=5.18.1
 release=1
 source=(http://www.cpan.org/src/5.0/$name-$version.tar.gz
-        http://www.buildgear.org/mirror/perl-5.16.3-cross-0.7.2.tar.gz)
+        http://buildgear.org/mirror/perl-5.18.1-cross-0.8.3.tar.gz)
 
 build() {
    cd $name-$version
