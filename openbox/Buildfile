@@ -2,11 +2,11 @@
 # URL: http://openbox.org
 
 name=openbox
-version=3.5.0
+version=3.5.2
 release=1
 source=(http://openbox.org/dist/openbox/openbox-$version.tar.gz
         openbox.service xinitrc)
-depends=(libXrandr libSM glib libxml2 pango which)
+depends=(libXrandr libSM glib libxml2 pango which util-linux)
 
 build() {
    cd $name-$version
