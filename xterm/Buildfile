@@ -2,7 +2,7 @@
 # URL: http://dickey.his.com/xterm/xterm.html
 
 name=xterm
-version=296
+version=297
 release=1
 source=(ftp://invisible-island.net/$name/$name-$version.tgz)
 depends=(libXaw ncurses)
