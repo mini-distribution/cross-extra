@@ -2,7 +2,7 @@
 # URL: http://www.wavpack.com/
 
 name=wavpack
-version=4.60.1
+version=4.70.0
 release=1
 source=(http://www.wavpack.com/wavpack-$version.tar.bz2)
 
