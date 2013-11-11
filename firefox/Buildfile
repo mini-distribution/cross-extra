@@ -2,7 +2,7 @@
 # URL: http://www.mozilla.org
 
 name=firefox
-version=24.0
+version=25.0
 release=1
 source=(http://download.cdn.mozilla.net/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
         firefox.mozconfig)
