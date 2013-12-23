@@ -1,0 +1,22 @@
+# Description: Library for reading and writing audio files in many common formats
+# URL: http://audiofile.68k.org
+
+name=audiofile
+version=0.3.6
+release=1
+source=(http://audiofile.68k.org/$name-$version.tar.gz)
+depends=alsa-lib
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
