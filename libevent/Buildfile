@@ -4,7 +4,7 @@
 name=libevent
 version=2.0.21
 release=1
-source=(https://github.com/downloads/$name/$name/$name-$version-stable.tar.gz)
+source=(http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-$version-stable.tar.gz)
 
 build() {
    cd $name-$version-stable
