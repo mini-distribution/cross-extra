@@ -2,24 +2,27 @@
 # URL:         http://oss.metaparadigm.com/json-c/
 
 name=json-c
-version=0.9
+version=0.12
 release=1
-source=(http://oss.metaparadigm.com/$name/$name-$version.tar.gz)
+source=(https://s3.amazonaws.com/json-c_releases/releases/json-c-$version.tar.gz
+        0001-Remove-unused-variable-size.patch)
 depends=()
 
 build() {
-    cd $name-$version
-    
-    ac_cv_func_malloc_0_nonnull=yes \
-    ac_cv_func_realloc_0_nonnull=yes \
-    ./configure --build=$BUILD \
-        --host=$HOST \
-        --prefix=/usr 
-    
-    make -j$JOBS
-    
-    make DESTDIR=$PKG install
-       
-   # Fix libtool files
-   fix_la_files $PKG
-}
+   cd $name-$version
+
+   patch -p1 -i $SRC/0001-Remove-unused-variable-size.patch
+
+   ac_cv_func_malloc_0_nonnull=yes \
+   ac_cv_func_realloc_0_nonnull=yes \
+   ./configure --build=$BUILD \
+   --host=$HOST \
+   --prefix=/usr
+
+   make -j$JOBS
+
+   make DESTDIR=$PKG install
+
+# Fix libtool files
+         fix_la_files $PKG
+   }
