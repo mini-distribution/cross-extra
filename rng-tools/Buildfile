@@ -2,9 +2,9 @@
 # URL: http://sourceforge.net/projects/gkernel/files/rng-tools/
 
 name=rng-tools
-version=4
+version=5
 release=1
-source=(http://heanet.dl.sourceforge.net/project/gkernel/$name/$version/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/gkernel/$name/$version/$name-$version.tar.gz)
 
 build()
 {
