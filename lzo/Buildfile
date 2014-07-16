@@ -2,7 +2,7 @@
 # URL: http://www.oberhumer.com/opensource/lzo/
 
 name=lzo
-version=2.06
+version=2.08
 release=1
 source=(http://www.oberhumer.com/opensource/lzo/download/$name-$version.tar.gz)
 
