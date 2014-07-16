@@ -2,9 +2,9 @@
 # URL: http://tmux.sourceforge.net/
 
 name=tmux
-version=1.8
+version=1.9a
 release=1
-source=(http://surfnet.dl.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/$name/$name/$name-${version%[a-z]}/$name-$version.tar.gz)
 depends=(ncurses libevent)
 
 build() {
