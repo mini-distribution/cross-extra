@@ -2,9 +2,9 @@
 # URL: http://mikmod.shlomifish.org/
 
 name=libmikmod
-version=3.3.3
+version=3.3.6
 release=1
-source=(http://surfnet.dl.sourceforge.net/project/mikmod/$name/$version/$name-$version.tar.gz)
+source=(http://downloads.sourceforge.net/project/mikmod/$name/$version/$name-$version.tar.gz)
 depends=(alsa-lib)
 
 build(){
