@@ -3,7 +3,7 @@
 # License: AFL GPLv2
 
 name=dbus-glib
-version=0.100.2
+version=0.102
 release=1
 source=(http://dbus.freedesktop.org/releases/$name/$name-$version.tar.gz)
 depends=(dbus glib expat)
