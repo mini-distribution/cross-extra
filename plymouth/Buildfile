@@ -2,7 +2,7 @@
 # URL: http://www.libpng.org
 
 name=plymouth
-version=0.8.8
+version=0.9.0
 release=1
 source=(http://www.freedesktop.org/software/plymouth/releases/$name-$version.tar.bz2)
 depends=(libpng libdrm)
