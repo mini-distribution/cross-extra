@@ -2,7 +2,7 @@
 # URL: http://sourceforge.net/projects/libmms/
 
 name=libmms
-version=0.6.2
+version=0.6.4
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.gz)
 depends=(glib)
@@ -15,7 +15,7 @@ build() {
                --prefix=/usr
 
    make -j $JOBS
-   make DESTDIR=$PKG install	
+   make DESTDIR=$PKG install
 
    # Fix libtool files
    fix_la_files $PKG
