@@ -2,9 +2,9 @@
 # URL: http://freshmeat.net/projects/imlib2/
 
 name=imlib2
-version=1.4.5
+version=1.4.6
 release=1
-source=(http://heanet.dl.sourceforge.net/project/enlightenment/imlib2-src/$version/$name-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/enlightenment/imlib2-src/$version/$name-$version.tar.bz2)
 depends=(freetype libpng libtiff libSM libXext)
 
 build() {
