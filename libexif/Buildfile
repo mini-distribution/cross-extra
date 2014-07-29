@@ -4,7 +4,7 @@
 name=libexif
 version=0.6.21
 release=1
-source=(http://heanet.dl.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
 
 build() {
    cd $name-$version
