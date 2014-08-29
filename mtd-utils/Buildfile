@@ -1,0 +1,15 @@
+# Description: Collection of tools that interact with the MTD subsystem
+# URL: http://www.linux-mtd.infradead.org/index.html
+# License: GPLv2
+
+name=mtd-utils
+version=1.5.1
+release=1
+source=(http://buildgear.org/mirror/mtd-utils-1.5.1.tar.gz)
+depends=(acl zlib lzo util-linux)
+
+build() {
+   cd $name-$version
+
+   make CROSS=$HOST- DESTDIR=$PKG install
+}
