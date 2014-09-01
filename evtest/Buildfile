@@ -1,0 +1,25 @@
+# Description: Input device event monitor and query tool
+# URL: http://cgit.freedesktop.org/evtest/
+## License: GPLv2 or later
+
+name=evtest
+version=1.32
+release=1
+source=(http://cgit.freedesktop.org/$name/snapshot/$name-$version.tar.bz2)
+depends=()
+
+build() {
+   cd $name-$version
+
+   autoreconf -i
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}
+
+check() {
+   check_tool autoreconf
+}
