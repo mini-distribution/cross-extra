@@ -8,6 +8,7 @@ source=(http://download.cdn.mozilla.net/pub/mozilla.org/$name/releases/$version/
         firefox.mozconfig)
 depends=(gtk2 cairo dbus dbus-glib libpng libffi zlib libX11 libXt MesaLib alsa-lib
          gst-plugins-base-0.10 gstreamer-0.10)
+options=(nostrip)
 
 build () {
    cd mozilla-release
