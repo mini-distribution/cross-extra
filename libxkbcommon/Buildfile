@@ -5,6 +5,7 @@ name=libxkbcommon
 version=0.4.3
 release=1
 source=(http://xkbcommon.org/download/$name-$version.tar.xz)
+depends=xkeyboard-config
 
 build () {
    cd $name-$version
