@@ -5,7 +5,7 @@ name=libmpeg2
 version=0.5.1
 release=1
 source=(http://$name.sourceforge.net/files/$name-$version.tar.gz)
-depends=(libsdl libXv libX11 libXext)
+depends=(libsdl)
 
 build () {
    cd $name-$version
@@ -17,7 +17,7 @@ build () {
 
    make -j $JOBS \
    LIBVO_CFLAGS="-I$SYSROOT/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT" \
-   LIBVO_LIBS="-lXext -lX11 -lXv -lSDL"
+   LIBVO_LIBS="-lSDL"
    make DESTDIR=$PKG install
 
    # Fix libtool files
