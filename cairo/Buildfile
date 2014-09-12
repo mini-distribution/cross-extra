@@ -1,11 +1,12 @@
-# Description: A 2D graphics library with support for multiple output devices
-# URL: http://www.cairographics.org/
+# Description: A 2D graphics library with support for multiple output targets
+# URL: http://www.cairographics.org
+# License: LGPLv2.1 MPL
 
 name=cairo
 version=1.12.16
 release=1
 source=(http://cairographics.org/releases/$name-$version.tar.xz)
-depends=(fontconfig libpng libXrender pixman glib libXext)
+depends=(libpng pixman glib fontconfig freetype)
 
 build() {
    cd $name-$version
@@ -13,14 +14,32 @@ build() {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --enable-xlib=yes \
-               --enable-xlib-xrender=yes \
-               --enable-png=yes \
-               --enable-ft=yes \
-               --enable-tee=yes \
-               ac_cv_func_XRenderCreateLinearGradient=yes \
-               ac_cv_func_XRenderCreateRadialGradient=yes \
-               ac_cv_func_XRenderCreateConicalGradient=yes
+               --disable-static \
+               --disable-xlib \
+               --disable-qt \
+               --disable-quartz \
+               --disable-win32 \
+               --disable-skia \
+               --disable-beos \
+               --disable-drm \
+               --disable-gallium \
+               --disable-gl \
+               --disable-glesv2 \
+               --disable-cogl \
+               --disable-directfb \
+               --disable-vg \
+               --disable-egl \
+               --disable-glx \
+               --disable-wgl \
+               --disable-ps \
+               --disable-pdf \
+               --disable-svg \
+               --disable-xml \
+               --without-x \
+               --enable-png \
+               --enable-ft \
+               --enable-fc \
+               --enable-tee
 
    make -j $JOBS
    make DESTDIR=$PKG install
