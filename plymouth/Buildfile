@@ -1,5 +1,5 @@
-# Description: Library of PNG support functions
-# URL: http://www.libpng.org
+# Description: Graphical boot animation
+# URL: http://www.freedesktop.org/wiki/Software/Plymouth
 
 name=plymouth
 version=0.9.0
