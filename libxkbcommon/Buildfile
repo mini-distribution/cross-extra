@@ -2,7 +2,7 @@
 # URL: http://xkbcommon.org
 
 name=libxkbcommon
-version=0.4.2
+version=0.4.3
 release=1
 source=(http://xkbcommon.org/download/$name-$version.tar.xz)
 
