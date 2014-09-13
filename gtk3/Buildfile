@@ -2,10 +2,10 @@
 # URL: http://www.gtk.org/
 
 name=gtk3
-version=3.10.2
+version=3.12.2
 release=1
 source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz)
-depends=(atk at-spi2-atk gdk-pixbuf hicolor-icon-theme libtiff pango libSM libXcursor libXrandr libXi)
+depends=(atk gdk-pixbuf hicolor-icon-theme libtiff pango wayland libxkbcommon)
 
 build () {
    cd gtk+-$version
@@ -13,17 +13,24 @@ build () {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --enable-xkb \
+               --disable-static \
+               --disable-nls \
+               --disable-xkb \
                --disable-xinerama \
                --disable-glibtest \
+               --disable-cloudprint \
                --disable-cups \
-               --with-x \
-               --enable-gtk2-dependency
+               --enable-wayland-backend \
+               --without-x \
+               --disable-gtk-doc-html \
+               --enable-gtk2-dependency \
+               --enable-man
+
 
    make -j $JOBS
    make DESTDIR=$PKG install
 
-   rm -r $PKG/usr/share/{locale,gtk-doc,gtk-3.0,glib-2.0} 
+   rm -r $PKG/usr/share/{locale,gtk-doc,gtk-3.0,glib-2.0}
 
    # Fix libtool files
    fix_la_files $PKG
