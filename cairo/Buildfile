@@ -31,9 +31,9 @@ build() {
                --disable-egl \
                --disable-glx \
                --disable-wgl \
-               --disable-ps \
-               --disable-pdf \
-               --disable-svg \
+               --enable-ps \
+               --enable-pdf \
+               --enable-svg \
                --disable-xml \
                --without-x \
                --enable-png \
