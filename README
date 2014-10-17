@@ -1,0 +1,7 @@
+The mini-distribution "extra" buildfiles.
+
+These buildfiles include extra features which can be added on top of the core and opt buildfiles.
+
+Buildfiles in this repository may depend on buildfiles in core, opt, and extra.
+
+These buildfiles are loosely maintained on a non-regular basis.
