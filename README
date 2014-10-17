@@ -1,4 +1,5 @@
-The mini-distribution "extra" buildfiles.
+The mini-distribution "extra" buildfile collection
+--------------------------------------------------
 
 These buildfiles include extra features which can be added on top of the core and opt buildfiles.
 
