@@ -1,5 +1,6 @@
 # Description: A data compression library suitable for data de-/compression in real-time.
 # URL: http://www.oberhumer.com/opensource/lzo/
+# License: GPLv2
 
 name=lzo
 version=2.08
