@@ -1,0 +1,20 @@
+# Description: a simple library for processing structured configuration files
+# URL: http://www.hyperrealm.com/libconfig/
+# License: LGPLv2.1
+
+name=libconfig
+version=1.4.9
+release=1
+source=(http://www.hyperrealm.com/libconfig/libconfig-$version.tar.gz)
+
+build() {
+   cd $name-$version
+
+   ./configure --host=$HOST \
+               --build=$BUILD \
+               --prefix=/usr \
+               --disable-examples
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+}
