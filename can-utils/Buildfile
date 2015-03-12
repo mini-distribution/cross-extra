@@ -1,5 +1,5 @@
 # Description: CAN userspace utilities and tools
-# URL: https://gitorious.org/linux-can/can-utils
+# URL: https://github.com/linux-can/can-utils
 # License: LGPLv2
 
 name=can-utils
@@ -7,7 +7,7 @@ version=git-master
 release=1
 
 build() {
-   git clone git://gitorious.org/linux-can/can-utils.git
+   git clone https://github.com/linux-can/can-utils.git
    cd can-utils
    chmod +x autogen.sh
    ./autogen.sh
