@@ -13,8 +13,8 @@ build() {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               PYTHON_INCLUDES="-I$SYSROOT/usr/include/python2.7" \
-               PYTHON_LIBS_LDFLAGS="-L$SYSROOT/usr/lib -lpython2.7"
+               PYTHON_INCLUDES="-I$SYSROOT/usr/include/python3.4m" \
+               PYTHON_LIBS_LDFLAGS="-L$SYSROOT/usr/lib -lpython3.4m"
 
    make -j$JOBS
    make DESTDIR=$PKG install
