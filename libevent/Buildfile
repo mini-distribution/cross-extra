@@ -2,7 +2,7 @@
 # URL: http://libevent.org/
 
 name=libevent
-version=2.0.21
+version=2.0.22
 release=1
 source=(http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-$version-stable.tar.gz)
 
