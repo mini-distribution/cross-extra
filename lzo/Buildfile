@@ -3,7 +3,7 @@
 # License: GPLv2
 
 name=lzo
-version=2.08
+version=2.09
 release=1
 source=(http://www.oberhumer.com/opensource/lzo/download/$name-$version.tar.gz)
 
