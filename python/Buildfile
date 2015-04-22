@@ -3,54 +3,29 @@
 # Depends on: db gdbm ncurses openssl readline bzip2 zlib
 
 name=python
-version=2.7.3
+version=3.4.3
 release=1
-source=(http://www.python.org/ftp/$name/$version/Python-$version.tar.bz2 \
-        $name-$version-xcompile.patch)
+source=(https://www.python.org/ftp/$name/$version/Python-$version.tar.xz \
+        config.site)
 depends=(db gdbm openssl readline bzip2 zlib)
 
 build () {
   cd Python-$version
-  
-  patch -p1 -i $SRC/$name-$version-xcompile.patch
-
-  ./configure
-
-  make python Parser/pgen
-  mv python hostpython
-  mv Parser/pgen Parser/hostpgen
-  make distclean
 
   CC="$HOST-gcc" CXX="$HOST-g++" \
   AR="$HOST-ar" RANLIB="$HOST-ranlib" \
-  ./configure --build=$BUILD \
+  CONFIG_SITE=$SRC/config.site ./configure --build=$BUILD \
               --host=$HOST \
               --prefix=/usr \
               --enable-shared \
               --with-threads \
               --without-gcc \
+              --disable-ipv6 \
               --with-cxx-main=$HOST-gcc
 
-  make -j $JOBS \
-       HOSTPYTHON="./hostpython" \
-       HOSTPGEN="./Parser/hostpgen" \
-       BLDSHARED="$HOST-gcc -shared" \
-       CROSS_COMPILE=$HOST- \
-       CROSS_COMPILE_TARGET="yes"
+  make -j $JOBS
 
-  make HOSTPYTHON="./hostpython" \
-       HOSTPGEN="./Parser/hostpgen" \
-       DESTDIR=$PKG install
-
-  make libpython2.7.so
-
-  install -D -m 0755 libpython2.7.so $PKG/usr/lib/libpython2.7.so.1.0
-  ln -sf libpython2.7.so.1.0 $PKG/usr/lib/libpython2.7.so
-  chmod 0755 $PKG/usr/lib/python2.7/lib-dynload/*.so 
-  ln -sf python2.7 $PKG/usr/bin/$name
-  ln -sf python2.7 $PKG/usr/lib/$name
-  ln -sf python2.7 $PKG/usr/include/$name
-  ln -sf /usr/lib/libpython2.7.so $PKG/usr/lib/python2.7/config/libpython2.7.so
+  make DESTDIR=$PKG install
 
   rm -rf $PKG/usr/lib/$name/{bsddb,ctypes,email,sqlite3}/test
   rm -rf $PKG/usr/lib/$name/{distutils,json,lib2to3}/tests
