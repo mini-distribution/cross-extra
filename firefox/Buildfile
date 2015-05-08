@@ -6,7 +6,7 @@ version=25.0
 release=1
 source=(http://download.cdn.mozilla.net/pub/mozilla.org/$name/releases/$version/source/$name-$version.source.tar.bz2
         firefox.mozconfig)
-depends=(gtk2 cairo dbus dbus-glib libpng libffi zlib libX11 libXt MesaLib alsa-lib
+depends=(gtk2 cairo dbus dbus-glib libpng libffi zlib libX11 libXt mesa alsa-lib
          gst-plugins-base-0.10 gstreamer-0.10)
 options=(nostrip)
 
