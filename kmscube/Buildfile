@@ -5,7 +5,7 @@ name=kmscube
 version=git-d04bbd4
 release=1
 source=(http://buildgear.org/mirror/$name-$version.zip)
-depends=(MesaLib)
+depends=(mesa)
 
 build() {
    cd $name-master

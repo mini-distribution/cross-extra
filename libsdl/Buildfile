@@ -5,7 +5,7 @@ name=libsdl
 version=1.2.15
 release=1
 source=(http://www.libsdl.org/release/SDL-$version.tar.gz)
-depends=(alsa-lib MesaLib)
+depends=(alsa-lib mesa)
 
 build () {
    cd SDL-$version
