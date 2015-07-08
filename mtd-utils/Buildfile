@@ -3,13 +3,13 @@
 # License: GPLv2
 
 name=mtd-utils
-version=1.5.1
 release=1
-source=(http://buildgear.org/mirror/mtd-utils-1.5.1.tar.gz)
 depends=(acl zlib lzo util-linux)
 
 build() {
-   cd $name-$version
+   git clone git://git.infradead.org/mtd-utils.git mtd-utils
+
+   cd mtd-utils
 
    make CROSS=$HOST- DESTDIR=$PKG install
 }
