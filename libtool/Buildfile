@@ -2,7 +2,7 @@
 # URL:         http://www.gnu.org/software/libtool/
 
 name=libtool
-version=2.4.2
+version=2.4.6
 release=1
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
 depends=()
