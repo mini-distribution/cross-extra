@@ -1,0 +1,26 @@
+# Description: A node.js BLE (Bluetooth low energy) central module.
+# URL: https://github.com/sandeepmistry/noble
+# License: MIT, GPLv2
+
+name=noble
+version=1.0.2
+release=1
+source=(https://nodejs.org/dist/v0.12.7/node-v0.12.7.tar.gz)
+depends=(node bluez)
+
+build() {
+	AR=$HOST-ar \
+	CC=$HOST-cc \
+	CXX=$HOST-g++ \
+	LINK=$HOST-g++ \
+	npm_config_arch=arm \
+	npm_config_nodedir=$SRC/node-v0.12.7 \
+	npm install noble
+
+	mkdir -p $PKG/usr/lib/
+	cp -r node_modules $PKG/usr/lib/
+}
+
+check() {
+	check_tool npm
+}
