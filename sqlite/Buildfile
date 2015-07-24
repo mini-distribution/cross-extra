@@ -2,7 +2,7 @@
 # URL: http://www.sqlite.org/
 
 name=sqlite
-version=3.08.05.00
+version=3.08.10.02
 release=1
 source=(http://www.sqlite.org/2014/$name-autoconf-${version//./}.tar.gz)
 depends=(ncurses readline)
