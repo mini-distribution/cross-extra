@@ -2,7 +2,7 @@
 # URL: http://www.mega-nerd.com/libsndfile
 
 name=libsndfile
-version=1.0.25
+version=1.0.26
 release=1
 source=(http://www.mega-nerd.com/$name/files/$name-$version.tar.gz)
 depends=(flac
