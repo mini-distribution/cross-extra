@@ -2,19 +2,20 @@
 # URL: http://www.oracle.com/database/berkeley-db/index.html
 
 name=db
-version=6.1.26
+version=6.2.23
 release=1
 source=(http://download.oracle.com/berkeley-db/$name-$version.tar.gz)
 
 build() {
   cd $name-$version/build_unix
 
+  db_cv_atomic=yes \
   ../dist/configure --build=$BUILD \
                     --host=$HOST \
                     --prefix=/usr \
                     --enable-compat185 \
                     --enable-shared \
-                    --enable-static \
+                    --disable-static \
                     --enable-cxx
 
   make -j $JOBS
