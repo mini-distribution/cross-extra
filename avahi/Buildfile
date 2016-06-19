@@ -2,9 +2,9 @@
 # URL: http://www.avahi.org
 
 name=avahi
-version=0.6.31
+version=0.6.32
 release=1
-source=(http://avahi.org/download/$name-$version.tar.gz)
+source=(https://github.com/lathiat/$name/releases/download/v$version/$name-$version.tar.gz)
 depends=(glib libdaemon dbus)
 
 build() {
@@ -14,12 +14,12 @@ build() {
                --host=$HOST \
                --prefix=/usr \
                --with-distro=none \
-	       --disable-qt3 \
+               --disable-qt3 \
                --disable-qt4 \
                --disable-gtk \
                --disable-gtk3 \
                --disable-gdbm \
-	       --disable-python \
+               --disable-python \
                --enable-libdaemon \
                --disable-mono \
                --with-avahi-user=root \
@@ -29,16 +29,18 @@ build() {
                --with-autoipd-group=root \
                --enable-dbus \
                --with-systemdsystemunitdir=/etc/systemd/system \
-               --with-dbus-sys=/etc/dbus-1/system.d
+               --with-dbus-sys=/etc/dbus-1/system.d \
+               --disable-nls
 
 
    make -j $JOBS
    make DESTDIR=$PKG install
 
-   rm -rf $PKG/usr/share/locale
-
    echo "mdns    5353/tcp" >> $PKG/etc/services
    echo "mdns    5353/udp" >> $PKG/etc/services
+
+   # Cleanup
+   rm -r $PKG/usr/share/locale
 
    # Fix libtool files
    fix_la_files $PKG
