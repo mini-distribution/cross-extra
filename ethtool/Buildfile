@@ -3,7 +3,7 @@
 # License: GPLv2
 
 name=ethtool
-version=4.0
+version=4.5
 release=1
 source=(https://www.kernel.org/pub/software/network/$name/$name-$version.tar.xz)
 depends=()
@@ -12,13 +12,10 @@ build() {
 
    cd $name-$version
 
-   ./configure \
-      --prefix=/usr \
-      --build=$BUILD \
-      --host=$HOST
+   ./configure --prefix=/usr \
+               --build=$BUILD \
+               --host=$HOST
 
    make -j$JOBS
    make DESTDIR=$PKG install
-
 }
-
