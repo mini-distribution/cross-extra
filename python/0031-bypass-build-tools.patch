@@ -1,0 +1,37 @@
+diff -Naur a/Makefile.pre.in b/Makefile.pre.in
+--- a/Makefile.pre.in	2015-12-07 02:39:09.000000000 +0100
++++ b/Makefile.pre.in	2016-06-21 22:17:30.662714936 +0200
+@@ -711,13 +711,13 @@
+ Programs/_freeze_importlib: Programs/_freeze_importlib.o $(LIBRARY_OBJS_OMIT_FROZEN)
+ 	$(LINKCC) $(PY_LDFLAGS) -o $@ Programs/_freeze_importlib.o $(LIBRARY_OBJS_OMIT_FROZEN) $(LIBS) $(MODLIBS) $(SYSLIBS) $(LDLAST)
+ 
+-Python/importlib_external.h: $(srcdir)/Lib/importlib/_bootstrap_external.py Programs/_freeze_importlib
+-	./Programs/_freeze_importlib \
+-		$(srcdir)/Lib/importlib/_bootstrap_external.py Python/importlib_external.h
+-
+-Python/importlib.h: $(srcdir)/Lib/importlib/_bootstrap.py Programs/_freeze_importlib
+-	./Programs/_freeze_importlib \
+-		$(srcdir)/Lib/importlib/_bootstrap.py Python/importlib.h
++#Python/importlib_external.h: $(srcdir)/Lib/importlib/_bootstrap_external.py Programs/_freeze_importlib
++#	./Programs/_freeze_importlib \
++#		$(srcdir)/Lib/importlib/_bootstrap_external.py Python/importlib_external.h
++
++#Python/importlib.h: $(srcdir)/Lib/importlib/_bootstrap.py Programs/_freeze_importlib
++#	./Programs/_freeze_importlib \
++#		$(srcdir)/Lib/importlib/_bootstrap.py Python/importlib.h
+ 
+ 
+ ############################################################################
+@@ -777,9 +777,9 @@
+ 
+ $(IO_OBJS): $(IO_H)
+ 
+-$(GRAMMAR_H): $(GRAMMAR_INPUT) $(PGEN)
+-		@$(MKDIR_P) Include
+-		$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
++#$(GRAMMAR_H): $(GRAMMAR_INPUT) $(PGEN)
++#		@$(MKDIR_P) Include
++#		$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
+ $(GRAMMAR_C): $(GRAMMAR_H)
+ 		touch $(GRAMMAR_C)
+ 
