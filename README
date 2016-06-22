@@ -1,8 +1,7 @@
-The mini-distribution "extra" buildfile collection
---------------------------------------------------
+Mini Distribution "extra" build files
+-------------------------------------
 
-These buildfiles include extra features which can be added on top of the core and opt buildfiles.
+This collection of build files include extra features. Build files in this
+repository may only depend on buildfiles in core, opt, and extra.
 
-Buildfiles in this repository may depend on buildfiles in core, opt, and extra.
-
-These buildfiles are loosely maintained on a non-regular basis.
+The "extra" build files are loosely maintained on a non-regular basis.
