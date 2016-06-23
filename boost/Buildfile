@@ -2,7 +2,7 @@
 # URL: http://www.boost.org/
 
 name=boost
-version=1.58.0
+version=1.61.0
 release=1
 source=(http://downloads.sourceforge.net/project/$name/$name/$version/${name}_${version//./_}.tar.bz2)
 depends=(expat icu python zlib)
@@ -10,32 +10,28 @@ depends=(expat icu python zlib)
 build() {
   cd ${name}_${version//./_}
 
-  mkdir -p tools/build/v2
-  echo 'using gcc : arm : $HOST-g++ ;' >> tools/build/v2/user-config.jam
-  echo 'using python : 2.7 : $SYSROOT/usr/bin/python2.7 : $SYSROOT/usr/include/python2.7 : $SYSROOT/usr/lib ;' >> tools/build/v2/user-config.jam
+  echo "using gcc : : $HOST-g++ ;" >> user-config.jam
+  echo "using python : 3.5 : $SYSROOT/usr/bin/python3.5 : $SYSROOT/usr/include/python3.5m : $SYSROOT/usr/lib ;" >> user-config.jam
 
   ./bootstrap.sh --prefix=/usr \
                  --with-python=$SYSROOT/usr/bin/python \
                  --with-python-root=$SYSROOT/usr \
-                 --with-python-version=2.7 \
+                 --with-python-version=3.5 \
                  --with-icu=$SYSROOT/usr
 
-  ./b2 -j $JOBS \
+  ./bjam -j $JOBS \
          -q -d+2 \
-         install \
-         release \
-         threading=single,multi \
+         variant=release \
          runtime-link=shared \
-         link=shared,static \
+         link=shared \
          debug-symbols=off \
-         --toolset=gcc \
-         --layout=tagged \
+         threading=multi \
+         abi=aapcs \
          --prefix=$PKG/usr \
-         --without-mpi
-
-	cd libs/python/pyste/install
-	python setup.py install --root=$PKG --prefix=/usr
-
-	mv $PKG/usr/bin/pyste.py $PKG/usr/bin/pyste
-	find $PKG -name '*.egg-info' | xargs rm
+         --user-config=user-config.jam \
+         --toolset=gcc \
+         --layout=system \
+         --without-mpi \
+         --ignore-site-config \
+         install
 }
