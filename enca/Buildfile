@@ -2,21 +2,14 @@
 # URL: http://cihar.com/software/enca/
 
 name=enca
-version=1.15
+version=1.19
 release=1
-source=(http://dl.cihar.com/$name/$name-$version.tar.bz2
-        enca-1.13-crosscompile.patch)
+source=(http://dl.cihar.com/$name/$name-$version.tar.xz)
 
 build() {
    cd $name-$version
 
-   patch -p1 < $SRC/enca-1.13-crosscompile.patch
-
-   ac_cv_file__dev_random=yes \
-   ac_cv_file__dev_urandom=no \
-   ac_cv_file__dev_srandom=no \
-   ac_cv_file__dev_arandom=no \
-   ./autogen.sh --build=$BUILD \
+   ./configure --build=$BUILD \
                 --host=$HOST \
                 --prefix=/usr \
                 --libexecdir=/usr/lib \
