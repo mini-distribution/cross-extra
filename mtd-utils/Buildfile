@@ -3,9 +3,9 @@
 # License: GPLv2
 
 name=mtd-utils
-version=1.5.1
+version=1.5.2
 release=1
-source=(http://buildgear.org/mirror/mtd-utils-1.5.1.tar.gz)
+source=(ftp://ftp.infradead.org/pub/mtd-utils/mtd-utils-$version.tar.bz2)
 depends=(acl zlib lzo util-linux)
 
 build() {
