@@ -2,7 +2,7 @@
 # URL: http://www.icu-project.org/
 
 name=icu
-version=54.1
+version=58.1
 release=1
 source=(http://download.icu-project.org/files/icu4c/$version/icu4c-${version//./_}-src.tgz
         0001-Disable-LDFLAGSICUDT-for-Linux.patch)
@@ -38,5 +38,5 @@ build() {
   make -j $JOBS
   make DESTDIR=$PKG install
 
-  rm $PKG/usr/share/icu/$version/license.html
+  rm $PKG/usr/share/icu/$version/LICENSE
 }
