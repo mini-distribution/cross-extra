@@ -2,12 +2,12 @@
 # URL:         http://eigen.tuxfamily.org
 
 name=eigen
-version=3.2.8
+version=3.3.0
 release=1
 source=(http://bitbucket.org/$name/$name/get/$version.tar.bz2)
 
 build () {
-   cd $name-$name-07105f7124f9
+   cd $name-$name-26667be4f70b
 
    mkdir -p $PKG/usr/include
    cp -r Eigen $PKG/usr/include/
