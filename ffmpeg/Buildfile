@@ -1,0 +1,26 @@
+# Description: A complete, cross-platform solution to record, convert and stream audio and video.
+# URL: https://ffmpeg.org/
+# License: LGPLv2.1+ GPLv2+
+
+name=ffmpeg
+version=3.2.2
+release=1
+source=(http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2)
+depends=()
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/usr \
+	            --cross-prefix=$HOST- \
+	            --enable-cross-compile \
+	            --target-os=linux \
+	            --arch=arm \
+	            --disable-static \
+	            --enable-shared
+
+	make -j$JOBS
+	make DESTDIR=$PKG install
+
+	rm -rf $PKG/usr/share/{ffmpeg,doc}
+}
