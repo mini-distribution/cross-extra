@@ -1,0 +1,21 @@
+# Description: The ARP scanner
+# URL: https://github.com/royhills/arp-scan
+# License: GPLv3
+
+name=arp-scan
+version=1.9
+release=1
+source=(https://github.com/royhills/arp-scan/releases/download/$version/arp-scan-$version.tar.gz)
+depends=(libpcap)
+
+build() {
+	cd $name-$version
+
+	pgac_cv_snprintf_long_long_int_format="%lld" \
+	./configure --prefix=/usr \
+	            --build=$BUILD \
+	            --host=$HOST
+
+	make -j$JOBS
+	make DESTDIR=$PKG install
+}
