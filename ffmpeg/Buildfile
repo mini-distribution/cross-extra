@@ -3,7 +3,7 @@
 # License: LGPLv2.1+ GPLv2+
 
 name=ffmpeg
-version=3.2.2
+version=3.2.4
 release=1
 source=(http://ffmpeg.org/releases/ffmpeg-$version.tar.bz2)
 depends=()
