@@ -3,7 +3,7 @@
 # License: GPLv2
 
 name=mtd-utils
-version=1.5.2
+version=2.0.0
 release=1
 source=(ftp://ftp.infradead.org/pub/mtd-utils/mtd-utils-$version.tar.bz2)
 depends=(acl zlib lzo util-linux)
@@ -11,5 +11,10 @@ depends=(acl zlib lzo util-linux)
 build() {
    cd $name-$version
 
-   make CROSS=$HOST- DESTDIR=$PKG install
+   ./configure --host=$HOST \
+               --build=$BUILD \
+               --prefix=/usr
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
 }
