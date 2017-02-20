@@ -3,23 +3,18 @@
 # License: LGPLv2+ GPLv2+
 
 name=liblockfile
-version=1.09
+version=1.14
 release=1
 source=(ftp://ftp.debian.org/debian/pool/main/libl/liblockfile/liblockfile\_$version.orig.tar.gz)
 
 build() {
-	cd $name-$version
+	cd $name
 
-	CC=$HOST-gcc \
-	AR=$HOST-ar \
 	 ./configure --prefix=/usr \
 	            --build=$BUILD \
 	            --host=$HOST \
-	            --disable-static
+	            --enable-shared
 
 	make -j$JOBS
-
-	mkdir -p $PKG/usr/{include,bin,lib}
-	mkdir -p $PKG/usr/man/man{1,3}
-	make ROOT=$PKG install
+	make DESTDIR=$PKG install
 }
