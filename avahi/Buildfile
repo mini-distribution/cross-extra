@@ -2,7 +2,7 @@
 # URL: http://www.avahi.org
 
 name=avahi
-version=0.6.32
+version=0.7
 release=1
 source=(https://github.com/lathiat/$name/releases/download/v$version/$name-$version.tar.gz)
 depends=(glib libdaemon dbus)
