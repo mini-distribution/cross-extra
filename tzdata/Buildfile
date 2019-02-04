@@ -1,0 +1,35 @@
+# Description: Time zone and daylight saving time data
+# URL: https://www.iana.org/time-zones
+# License: GPLv2
+
+name=tzdata
+version=2018i
+release=1
+source=(https://data.iana.org/time-zones/releases/tzcode$version.tar.gz
+        https://data.iana.org/time-zones/releases/$name$version.tar.gz)
+
+timezones=('africa' 'antarctica' 'asia' 'australasia'
+           'europe' 'northamerica' 'southamerica'
+           'pacificnew' 'etcetera' 'backward'
+           'systemv' 'factory')
+
+build () {
+
+    # Build zoneinfo compiler for host
+    make zic
+
+    make -j $JOBS AR=$HOST-ar cc=$HOST-gcc
+    make DESTDIR=$PKG install
+
+    # Install timezone data
+    ./zic -d $PKG/usr/share/zoneinfo ${timezones[@]}
+    ./zic -d $PKG/usr/share/zoneinfo/posix ${timezones[@]}
+    ./zic -d $PKG/usr/share/zoneinfo/right -L leapseconds ${timezones[@]}
+    ./zic -d $PKG/usr/share/zoneinfo -p America/New_York
+    install -m444 -t $PKG/usr/share/zoneinfo iso3166.tab zone1970.tab zone.tab
+    
+    # Set default timezone (override if not using universal time zone)
+    echo "Universal" > $PKG/etc/timezone
+    rm $PKG/etc/localtime
+    ln -s /usr/share/zoneinfo/Universal $PKG/etc/localtime
+}
